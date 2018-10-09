@@ -94,22 +94,27 @@ void HandleConcert::updateConcert(int id) {
 
 void HandleConcert::deleteConcert(int id) {
     bool found = false;
-    int i, results;
-    for( i = 0; i < num_registered_concerts; i ++) {
+    int results;
+    for(int i = 0; i < num_registered_concerts; i ++) {
         if(concerts[i]->id() == id) {
             found = true;
-            delete concerts[i];
-            concerts[i] = nullptr;
+            results = i;
             break;          
         }
     }
     if(found) {
         deleteConcertToPrefered(id);
-
-        for ( ; i < num_registered_concerts; i++) {
-            concerts[i] = concerts[i+1];
-        }
+        for (int i = results ; i < num_registered_concerts; i++) {
+                    
+            if(results == num_registered_concerts - 1){        
+                concerts[results] = nullptr;
+            } else {
+                concerts[i] = concerts[i+1];
+            }
+    }
         
+        delete concerts[results];
+        concerts[results] = nullptr;
         num_registered_concerts--;
 
     } else {
@@ -206,6 +211,7 @@ void HandleConcert::deleteConcertToPrefered(int id){
     } else {
         std::cout << "sono nell'else. \n";
         for (int i = 0; i < num_prefered_concerts; i++) {
+            std::cout << "prefered id: " << preferedConcerts[i]->id() << "\n";
             if(preferedConcerts[i]->id() == id){
                 found = true;
                 delete preferedConcerts[i];
@@ -229,6 +235,7 @@ void HandleConcert::deleteConcertToPrefered(int id){
 
 void HandleConcert::resizePrefered() {
 
+    std::cout << "resize.. \n";
     int newSizePrefered = size_prefered * 2;
     Concert** temp = new Concert* [newSizePrefered];
     for (int i = 0; i < size_prefered; i++){

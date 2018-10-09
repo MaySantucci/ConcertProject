@@ -15,6 +15,7 @@ void UserFunctions::insertConcert() {
     if(handler->checkAddConcertToConcerts()){
         showForm();
     } else {
+        std::cout << "resize.. \n";
         handler->resizeConcerts();
         showForm();
     }
@@ -68,6 +69,7 @@ void UserFunctions::insertPrefered(int id) {
     if(handler->checkAddConcertToPrefered()){
         handler -> addConcertToPrefered(id);
     } else {
+        std::cout << "resize.. \n";
         handler->resizePrefered();
         handler->addConcertToPrefered(id);
     }
