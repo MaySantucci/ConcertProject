@@ -14,6 +14,7 @@ class UserFunctions {
 
     //Functions to manage Prefered
     void listPreferedConcerts();
+    bool checkPreferedInit();
     void insertPrefered(int id);
     void deletePrefered(int id);
 

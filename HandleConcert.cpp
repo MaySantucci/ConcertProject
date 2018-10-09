@@ -14,7 +14,7 @@ void HandleConcert::listConcerts() {
     if(concerts != nullptr && num_registered_concerts == 0) {
         std::cout << "No concerts stored. \n";
     } else {
-        std::cout << "CONCERTS: \n ";
+        std::cout << "CONCERTS: \n";
         for (int i = 0; i < num_registered_concerts; i++){        
                 std::cout << "Id: " << concerts[i]->id() << " Group: " << concerts[i]->groupName()<< "\n";
             //std::cout << "\tPlace: " << concerts[i]->place() << " Date: " << concerts[i]->date()<< "\n";
@@ -35,6 +35,11 @@ bool HandleConcert::checkAddConcertToConcerts() {
 bool HandleConcert::checkIfConcertsEmpty() {
     std::cout << "elementi: " << num_registered_concerts << "\n";
     return num_registered_concerts == 0;
+}
+
+bool HandleConcert::checkIfPreferedEmpty() {
+    std::cout << "elementi: " << num_prefered_concerts << "\n";
+    return num_prefered_concerts == 0;
 }
 
 void HandleConcert::addConcertToConcerts(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket){
@@ -128,7 +133,7 @@ void HandleConcert::getConcertDetails(int id) {
         for(int i = 0; i < num_registered_concerts; i++) {
             if(concerts[i]->id() == id) {
                 results ++;
-                std::cout << "CONCERT: \n " << "Id: " << concerts[i]->id() << " Group: " << concerts[i]->groupName()<< "\n";
+                std::cout << "CONCERT: \n" << "Id: " << concerts[i]->id() << " Group: " << concerts[i]->groupName()<< "\n";
                 std::cout << "\tPlace: " << concerts[i]->place() << " Date: " << concerts[i]->date()<< "\n";
                 std::cout << "\tPrice: " << concerts[i]->price() << "$ Available Ticket: " << concerts[i]->availableTicket()<< "\n";
                 break;
@@ -167,7 +172,7 @@ void HandleConcert::listPreferedConcerts() {
         std::cout << "PREFERED CONCERT: \n";
 
         for (int i = 0; i < num_prefered_concerts; i++){        
-            std::cout  << "Id: " << preferedConcerts[i]->id() << " Group: " << preferedConcerts[i]->groupName()<< "\n";
+            std::cout  << "Id: " << preferedConcerts[i]->id() << "\tGroup: " << preferedConcerts[i]->groupName()<< "\n";
             std::cout << "\tPlace: " << concerts[i]->place() << " Date: " << concerts[i]->date()<< "\n";
             std::cout << "\tPrice: " << concerts[i]->price() << "$ Available Ticket: " << concerts[i]->availableTicket()<< "\n";
 

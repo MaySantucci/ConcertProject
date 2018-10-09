@@ -113,7 +113,7 @@ int main(int argc, char const *argv[])
         } 
         else if (in == "unstar" || in == "7") {
             std::cout << "\t (7) - Remove prefered concert. \n";
-            if (!(user->checkConcertsInit())) {
+            if (!(user->checkPreferedInit())) {
                 std::string id_sting;
                 int id;
                 std::cout << "Id: " ;

@@ -22,27 +22,22 @@ void UserFunctions::insertConcert() {
 }
 
 void UserFunctions::showForm(){
-        std::string input;
 
         std::cout << "Group name: " ;
-        std::cin >> input;
-        group_name = std::string(input);
+        std::cin.ignore();
+        std::getline (std::cin,group_name);
 
         std::cout << "Place: " ;
-        std::cin >> input;
-        place = std::string(input);
+        std::getline (std::cin,place);
 
         std::cout << "Date: " ;
-        std::cin >> input;
-        date = std::string(input);
+        std::getline (std::cin,date);
 
         std::cout << "Price: " ;
-        std::cin >> input;
-        price = std::string(input);
+        std::getline (std::cin,price);
 
         std::cout << "Available ticket: " ;
-        std::cin >> input;
-        available_ticket = std::string(input);
+        std::getline (std::cin,available_ticket);
 
         handler->addConcertToConcerts(group_name, place, date, price, available_ticket);
 
@@ -65,6 +60,11 @@ void UserFunctions::deleteConcert(int id) {
 void UserFunctions::listPreferedConcerts() {
     handler->listPreferedConcerts();
 }
+
+bool UserFunctions::checkPreferedInit() {
+    handler->checkIfPreferedEmpty();
+}
+
 void UserFunctions::insertPrefered(int id) {
     if(handler->checkAddConcertToPrefered()){
         handler -> addConcertToPrefered(id);

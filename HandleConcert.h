@@ -22,6 +22,7 @@ class HandleConcert {
 
     //Functions to manage Prefered
     void listPreferedConcerts();
+    bool checkIfPreferedEmpty();
     bool checkAddConcertToPrefered();
     void addConcertToPrefered(int id);
     void deleteConcertToPrefered(int id);
