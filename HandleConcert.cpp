@@ -255,7 +255,7 @@ void HandleConcert::deleteConcertToPreferred(int id) {
    Concert* found = getPreferredById(id);
 
     if(found != nullptr) {
-       delete found;
+       //delete found;
        found = nullptr;
 
        for (int j = preferred_position + 1; j < num_preferred_concerts; ++j) {
