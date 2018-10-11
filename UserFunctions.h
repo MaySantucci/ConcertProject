@@ -12,11 +12,11 @@ class UserFunctions {
     void updateConcert(int id);
     void deleteConcert(int id);
 
-    //Functions to manage Prefered
-    void listPreferedConcerts();
-    bool checkPreferedInit();
-    void insertPrefered(int id);
-    void deletePrefered(int id);
+    //Functions to manage Preferred
+    void listPreferredConcerts();
+    bool checkPreferredInit();
+    void insertPreferred(int id);
+    void deletePreferred(int id);
 
     private:
     std::string group_name, place, date, price, available_ticket;

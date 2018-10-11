@@ -101,7 +101,7 @@ int main(int argc, char const *argv[])
                 try {                    
                     id = stoi(id_sting);          
 
-                    user->insertPrefered(id);
+                    user->insertPreferred(id);
 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
@@ -113,7 +113,7 @@ int main(int argc, char const *argv[])
         } 
         else if (in == "unstar" || in == "7") {
             std::cout << "\t (7) - Remove prefered concert. \n";
-            if (!(user->checkPreferedInit())) {
+            if (!(user->checkPreferredInit())) {
                 std::string id_sting;
                 int id;
                 std::cout << "Id: " ;
@@ -121,7 +121,7 @@ int main(int argc, char const *argv[])
                 try {                    
                     id = stoi(id_sting);      
 
-                    user->deletePrefered(id);
+                    user->deletePreferred(id);
 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
@@ -133,7 +133,7 @@ int main(int argc, char const *argv[])
         } 
         else if (in == "listar" || in == "8") {
             std::cout << "\t (8) - List all prefered concerts. \n";
-            user->listPreferedConcerts();
+            user->listPreferredConcerts();
         } 
         else if (in == "exit" || in == "9") {
             std::cout << "\t (9) - Close the app. \n";

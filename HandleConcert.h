@@ -7,6 +7,9 @@ class HandleConcert {
     public:
     HandleConcert();
 
+    Concert* getConcertById(int id);
+    int concert_position;
+
     //Functions to manage Concert
     void listConcerts();
     bool checkAddConcertToConcerts();
@@ -20,14 +23,18 @@ class HandleConcert {
 
     void resizeConcerts();
 
-    //Functions to manage Prefered
-    void listPreferedConcerts();
-    bool checkIfPreferedEmpty();
-    bool checkAddConcertToPrefered();
-    void addConcertToPrefered(int id);
-    void deleteConcertToPrefered(int id);
+    //Functions to manage Preferred
+    
+    Concert* getPreferredById(int id);
+    int preferred_position;
 
-    void resizePrefered();
+    void listPreferredConcerts();
+    bool checkIfPreferredEmpty();
+    bool checkAddConcertToPreferred();
+    void addConcertToPreferred(int id);
+    void deleteConcertToPreferred(int id);
+
+    void resizePreferred();
 
     //Concert's variables
     int num_registered_concerts = 0;
@@ -36,11 +43,11 @@ class HandleConcert {
     
     Concert** concerts;
 
-    //Prefered's variables
-    int num_prefered_concerts = 0;
-    int size_prefered;
+    //Preferred's variables
+    int num_preferred_concerts = 0;
+    int size_preferred;
 
-    Concert** preferedConcerts;
+    Concert** preferredConcerts;
 
 };
 

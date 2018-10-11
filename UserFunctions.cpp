@@ -48,7 +48,6 @@ bool UserFunctions::checkConcertsInit() {
 }
 
 void UserFunctions::updateConcert(int id) {
-    std::cout << "Update concert. \n";
     handler->updateConcert(id);
 }
 
@@ -56,25 +55,25 @@ void UserFunctions::deleteConcert(int id) {
     handler->deleteConcert(id);
 }
 
-//Functions to manage Prefered
-void UserFunctions::listPreferedConcerts() {
-    handler->listPreferedConcerts();
+//Functions to manage Preferred
+void UserFunctions::listPreferredConcerts() {
+    handler->listPreferredConcerts();
 }
 
-bool UserFunctions::checkPreferedInit() {
-    handler->checkIfPreferedEmpty();
+bool UserFunctions::checkPreferredInit() {
+    handler->checkIfPreferredEmpty();
 }
 
-void UserFunctions::insertPrefered(int id) {
-    if(handler->checkAddConcertToPrefered()){
-        handler -> addConcertToPrefered(id);
+void UserFunctions::insertPreferred(int id) {
+    if(handler->checkAddConcertToPreferred()){
+        handler -> addConcertToPreferred(id);
     } else {
         std::cout << "resize.. \n";
-        handler->resizePrefered();
-        handler->addConcertToPrefered(id);
+        handler->resizePreferred();
+        handler->addConcertToPreferred(id);
     }
 }
 
-void UserFunctions::deletePrefered(int id){
-    handler->deleteConcertToPrefered(id);
+void UserFunctions::deletePreferred(int id){
+    handler->deleteConcertToPreferred(id);
 }
