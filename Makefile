@@ -1,11 +1,12 @@
 project_name = concert_manager
-debug_binary = $(project_name)_debug
+release_binary = $(project_name).out
+debug_binary = $(project_name)_debug.out
 
 build:
-	g++ *.cpp -o $(project_name)
+	g++ *.cpp -o $(release_binary)
 
 run: build
-	./$(project_name)
+	./$(release_binary)
 
 build-debug:
 	g++ -g *.cpp -o $(debug_binary)
@@ -14,4 +15,4 @@ debug: build-debug
 	gdb $(debug_binary)
 
 clean:
-	rm $(project_name) $(debug_binary)
+	rm $(release_binary) $(debug_binary)
