@@ -70,36 +70,33 @@ void HandleConcert::updateConcert(int id) {
     if(found != nullptr) {        
         std::cout << "Concert found. \n";
         std::cout << "Id: " << concerts[concert_position]->id() << "\n";
-
-        std::string input;
+        
+        std::string group_name, place, date, price, available_ticket;
+        
         std::cout << "Group name: " << concerts[concert_position]->groupName() << "\n";
-        std::cout << "New group name: " ;
-        std::cin >> input;
-        std::string group_name = std::string(input);
+        std::cout << "New group name: ";       
+        std::cin.ignore();
+        std::getline (std::cin,group_name);;
         concerts[concert_position]->setGroupName(group_name);
 
         std::cout << "Place: " << concerts[concert_position]->place() << "\n";
         std::cout << "New place: " ;
-        std::cin >> input;
-        std::string place = std::string(input);                
+        std::getline (std::cin,place);               
         concerts[concert_position]->setPlace(place);
 
         std::cout << "Date: " << concerts[concert_position]->date() << "\n";
         std::cout << "New date: " ;
-        std::cin >> input;
-        std::string date = std::string(input);
+        std::getline (std::cin,date);
         concerts[concert_position]->setDate(date);
 
         std::cout << "Price: " << concerts[concert_position]->price() << "\n";
         std::cout << "New price: " ;
-        std::cin >> input;
-        std::string price = std::string(input);
+        std::getline (std::cin,price);
         concerts[concert_position]->setPrice(price);
 
         std::cout << "Available ticket: " << concerts[concert_position]->availableTicket() << "\n";
         std::cout << " New available ticket: " ;
-        std::cin >> input;
-        std::string available_ticket = std::string(input);
+        std::getline (std::cin,available_ticket);
         concerts[concert_position]->setAvailableTicket(available_ticket);
 
     } else {
