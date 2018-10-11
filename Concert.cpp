@@ -1,7 +1,7 @@
 #include "Concert.h"
 
 Concert::Concert () {
-    
+
 }
 
 Concert::Concert (int id, std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket) {

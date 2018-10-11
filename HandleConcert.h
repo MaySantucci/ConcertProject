@@ -17,6 +17,7 @@ class HandleConcert {
     void addConcertToConcerts(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket);
 
     void updateConcert(int id);
+    void shiftConcertToLeft();
     void deleteConcert(int id);
     
     void getConcertDetails(int id);
