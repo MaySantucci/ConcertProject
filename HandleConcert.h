@@ -8,7 +8,7 @@ class HandleConcert {
     HandleConcert();
 
     Concert* getConcertById(int id);
-    int concert_position;
+    Concert* getConcertById(int id, int& position);
 
     //Functions to manage Concert
     void listConcerts();
@@ -17,7 +17,7 @@ class HandleConcert {
     void addConcertToConcerts(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket);
 
     void updateConcert(int id);
-    void shiftConcertToLeft();
+    void shiftConcertToLeft(int startingPosition);
     void deleteConcert(int id);
     
     void getConcertDetails(int id);
@@ -26,13 +26,14 @@ class HandleConcert {
 
     //Functions to manage Preferred
     
-    Concert* getPreferredById(int id);
-    int preferred_position;
+    Concert* getPreferredById(int id, int& position);
 
     void listPreferredConcerts();
     bool checkIfPreferredEmpty();
     bool checkAddConcertToPreferred();
     void addConcertToPreferred(int id);
+
+    void shiftPreferredToLeft(int startingPosition);
     void deleteConcertToPreferred(int id);
 
     void resizePreferred();
