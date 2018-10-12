@@ -2,13 +2,6 @@
 #include "Concert.h"
 #include <iostream>
 
-HandleConcert::HandleConcert() {
-    //size_concerts = 1;
-    size_preferred = 1;
-    //concerts = new Concert* [size_concerts];
-    preferredConcerts = new Concert* [size_preferred];
-}
-
 Concert* HandleConcert::getConcertById(int id) {    
     /*
     Concert* found = nullptr;
@@ -131,29 +124,12 @@ void HandleConcert::shiftConcertToLeft(int startingPosition) {
 }
 
 void HandleConcert::deleteConcert(int id) {
-    /*
-    int position = -1;
-    Concert* found = getConcertById(id, position);
-
-    if (found != nullptr) {
-        // delete from preferred list         
+    int concert_position = -1;
+    if(getConcertById(id, concert_position) != nullptr) {
+        //check if concert is in favourite and delete from it.
         deleteConcertToPreferred(id);
-        
-
-        delete found;
-        concerts[position] = nullptr;
-
-        // shift elements after deleted concert to the left to fill the array
-        shiftConcertToLeft(position);
-    
-        num_registered_concerts--;
-
-    } else {
-        std::cout << "No concert found. \n";
+        concerts.erase(concerts.begin() + concert_position);
     }
-
-    std::cout << "num elem after delete: " << num_registered_concerts << "\n";
-    */
 }
 
 void HandleConcert::getConcertDetails(int id) { 
@@ -168,38 +144,33 @@ void HandleConcert::getConcertDetails(int id) {
 }
 
 
-Concert* HandleConcert::getPreferredById(int id, int& position) {
-   /*
-    for(int i = 0; i < num_preferred_concerts; ++i) {
-        if(preferredConcerts[i]->id() == id) {
-            position = i;
-            return preferredConcerts[i];
-        }
+//Functions to manage preferred
+void HandleConcert::addConcertToPreferred(int id) {
+    int position = -1;
+    Concert* found = getConcertById(id, position);
+    if(found != nullptr) {
+        preferredConcerts.push_back(found);
+    } else {
+        std::cout << "Id not found. Impossible to add to preferred. \n";
     }
-    return nullptr;
-    */
 }
 
-//Functions to manage preferred
 void HandleConcert::listPreferredConcerts() {
-    /*
-    if(preferredConcerts != nullptr && num_preferred_concerts == 0) {
-        std::cout << "No concerts stored in preferred. \n";
+    if(preferredConcerts.empty()) {
+        std::cout << "No concerts in favourite. \n";
     } else {
-        std::cout << "preferred CONCERT: \n";
-
-        for (int i = 0; i < num_preferred_concerts; i++){        
-            std::cout  << "Id: " << preferredConcerts[i]->id() << "\tGroup: " << preferredConcerts[i]->groupName()<< "\n";
-            std::cout << "\tPlace: " << preferredConcerts[i]->place() << " Date: " << preferredConcerts[i]->date()<< "\n";
-            std::cout << "\tPrice: " << preferredConcerts[i]->price() << "$ Available Ticket: " << preferredConcerts[i]->availableTicket()<< "\n";
+        std::cout << "FAVOURITE CONCERTS: \n";
+        for(auto it = preferredConcerts.begin(); it != preferredConcerts.end(); it++) {       
+            std::cout  << "Id: " << (*it)->id() << "\tGroup: " << (*it)->groupName()<< "\n";
+            std::cout << "\tPlace: " << (*it)->place() << " Date: " << (*it)->date()<< "\n";
+            std::cout << "\tPrice: " << (*it)->price() << "$ Available Ticket: " << (*it)->availableTicket()<< "\n";
         }
     }
-    */
 }
 
 
 bool HandleConcert::checkIfPreferredEmpty() {
-    //return num_preferred_concerts == 0;
+    return preferredConcerts.empty();
 }
 
 bool HandleConcert::checkAddConcertToPreferred() {
@@ -212,59 +183,28 @@ bool HandleConcert::checkAddConcertToPreferred() {
     */
 }
 
-void HandleConcert::addConcertToPreferred(int id) {
-    /*
-    int concertPosition = -1;
-    Concert* found = getConcertById(id, concertPosition);
 
-    if(found != nullptr){
-        preferredConcerts[num_preferred_concerts] = concerts[concertPosition];
-        std::cout << "Concert succesfully added to preferred. \n";
-        num_preferred_concerts++;
-    } else {
-        std::cout << "Id not found. Impossible to add to preferred. \n";
-    }
-    */
-}
-
-void HandleConcert::shiftPreferredToLeft(int startingPosition) {
-/*
-       for (int j = startingPosition + 1; j < num_preferred_concerts; ++j) {
-           preferredConcerts[j-1] = preferredConcerts[j];
-           preferredConcerts[j] = nullptr;
-       }
-*/
-}
 
 void HandleConcert::deleteConcertToPreferred(int id) {
-    /*
-    int startingPosition = -1;
-    Concert* found = getPreferredById(id, startingPosition);
+    int position = -1;
 
-    if(found != nullptr) {
-
-        found = nullptr;
-        shiftConcertToLeft(startingPosition);
-        num_preferred_concerts--;
+    if(getPreferredById(id, position) != nullptr) {
+        
+        preferredConcerts.erase(preferredConcerts.begin() + position);
         std::cout << "Concert successfully deleted from preferred. \n";
-
     } else {
         std::cout << "Concert not found in preferred. \n";
     }
-    */
 }
 
-void HandleConcert::resizePreferred() {
-    /*
-    int newSizePreferred = size_preferred * 2;
-    Concert** temp = new Concert* [newSizePreferred];
-    for (int i = 0; i < size_preferred; i++){
-        temp[i] = preferredConcerts[i];
+Concert* HandleConcert::getPreferredById(int id, int& position) {
+    int i = 0;
+    for(auto it = preferredConcerts.begin(); it != preferredConcerts.end(); it++) {
+        if((*it)->id() == id) {
+            position = i;
+            return *it;
+        }
+        i++;
     }
-
-    delete [] preferredConcerts;
-    
-    size_preferred = newSizePreferred;
-    preferredConcerts = temp;
-    */
+    return nullptr;
 }

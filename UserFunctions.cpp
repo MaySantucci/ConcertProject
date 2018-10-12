@@ -59,13 +59,7 @@ bool UserFunctions::checkPreferredInit() {
 }
 
 void UserFunctions::insertPreferred(int id) {
-    if(handler->checkAddConcertToPreferred()){
-        handler -> addConcertToPreferred(id);
-    } else {
-        std::cout << "resize.. \n";
-        handler->resizePreferred();
         handler->addConcertToPreferred(id);
-    }
 }
 
 void UserFunctions::deletePreferred(int id){

@@ -6,8 +6,6 @@
 
 class HandleConcert {
     public:
-    HandleConcert();
-
     Concert* getConcertById(int id);
     Concert* getConcertById(int id, int& position);
 
@@ -35,21 +33,11 @@ class HandleConcert {
     void shiftPreferredToLeft(int startingPosition);
     void deleteConcertToPreferred(int id);
 
-    void resizePreferred();
-
     //Concert's variables
-    int num_registered_concerts = 0;
-    int size_concerts;
     int code = 0;
     
     std::vector<Concert*> concerts;
-    //Concert** concerts;
-
-    //Preferred's variables
-    int num_preferred_concerts = 0;
-    int size_preferred;
-
-    Concert** preferredConcerts;
+    std::vector<Concert*> preferredConcerts;
 
 };
 
