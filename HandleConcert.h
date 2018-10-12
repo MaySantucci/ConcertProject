@@ -6,33 +6,29 @@
 
 class HandleConcert {
     public:
-    Concert* getConcertById(int id);
-    Concert* getConcertById(int id, int& position);
+    ~HandleConcert();
+
 
     //Functions to manage Concert
     void listConcerts();
-    bool checkAddConcertToConcerts();
-    bool checkIfConcertsEmpty();
+    void getConcertDetails(int id);
     void addConcertToConcerts(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket);
-
     void updateConcert(int id);
-    void shiftConcertToLeft(int startingPosition);
     void deleteConcert(int id);
     
-    void getConcertDetails(int id);
+    //Functions to manage Preferred    
 
-    //Functions to manage Preferred
-    
+    void addConcertToPreferred(int id);
+    void deleteConcertToPreferred(int id);
+    void listPreferredConcerts();
+
+    private:
+    Concert* getConcertById(int id, int& position);
     Concert* getPreferredById(int id, int& position);
 
-    void listPreferredConcerts();
+    
+    bool checkIfConcertsEmpty();
     bool checkIfPreferredEmpty();
-    bool checkAddConcertToPreferred();
-    void addConcertToPreferred(int id);
-
-    void shiftPreferredToLeft(int startingPosition);
-    void deleteConcertToPreferred(int id);
-
     //Concert's variables
     int code = 0;
     

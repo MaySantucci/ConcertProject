@@ -2,23 +2,32 @@
 #include "Concert.h"
 #include <iostream>
 
-Concert* HandleConcert::getConcertById(int id) {    
-    /*
-    Concert* found = nullptr;
-    int i = 0;
-
-    for (i = 0; i < num_registered_concerts; ++i) {
-        if(concerts[i]->id() == id) {
-            found = concerts[i];
-            break;          
-        }
-    }
-   // concert_position = i;
-    return found;
-    */
-}
 
 //Functions to manage Concerts
+HandleConcert::~HandleConcert() {
+    for (int i = 0; i < concerts.size(); i++) {
+        delete concerts.at(i);
+    }
+}
+
+bool HandleConcert::checkIfConcertsEmpty() {
+    return concerts.empty();
+}
+
+Concert* HandleConcert::getConcertById(int id, int& position) {   
+    if(!concerts.empty()) {
+        int pos = 0;
+        for(auto it = concerts.begin(); it != concerts.end(); it++) {
+            if ((*it)->id() == id) {
+                position = pos;
+                return *it;
+            }
+            pos ++;
+        }
+    }
+    return nullptr;
+}
+
 void HandleConcert::listConcerts() {
     if(concerts.empty()) {
         std::cout << "No concerts stored. \n";
@@ -30,21 +39,16 @@ void HandleConcert::listConcerts() {
     }
 }
 
-bool HandleConcert::checkAddConcertToConcerts() {
-    /*
-    std::cout << "registered concert & size: " << num_registered_concerts << " & " << size_concerts << "\n";
-    if(num_registered_concerts < size_concerts){
-        return true;
+void HandleConcert::getConcertDetails(int id) { 
+    int position = -1;
+    if(getConcertById(id, position) != nullptr) {
+        std::cout << "CONCERT: \n" << "Id: " << concerts.at(position)->id()<< " Group: " << concerts.at(position)->groupName()<< "\n";
+        std::cout << "\tPlace: " << concerts.at(position)->place() << " Date: " << concerts.at(position)->date()<< "\n";
+        std::cout << "\tPrice: " << concerts.at(position)->price() << "$ Available Ticket: " << concerts.at(position)->availableTicket()<< "\n";   
     } else {
-        return false;
+        std::cout << "No concert found with this id. \n";
     }
-    */
 }
-
-bool HandleConcert::checkIfConcertsEmpty() {
-    return concerts.empty();
-}
-
 
 void HandleConcert::addConcertToConcerts(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket) {
     Concert* concertToAdd = new Concert (code, groupName, place, date, price, availableTicket);
@@ -100,59 +104,31 @@ void HandleConcert::updateConcert(int id) {
 }
 
 
-Concert* HandleConcert::getConcertById(int id, int& position) {   
-    if(!concerts.empty()) {
-        int pos = 0;
-        for(auto it = concerts.begin(); it != concerts.end(); it++) {
-            if ((*it)->id() == id) {
-                position = pos;
-                return *it;
-            }
-            pos ++;
-        }
-    }
-    return nullptr;
-}
-
-void HandleConcert::shiftConcertToLeft(int startingPosition) {
-    /*
-    for (int j = startingPosition + 1; j < num_registered_concerts; ++j) {
-        concerts[j-1] = concerts[j];
-        concerts[j] = nullptr;
-    }
-    */
-}
-
 void HandleConcert::deleteConcert(int id) {
     int concert_position = -1;
     if(getConcertById(id, concert_position) != nullptr) {
         //check if concert is in favourite and delete from it.
         deleteConcertToPreferred(id);
+        delete concerts.at(concert_position);
         concerts.erase(concerts.begin() + concert_position);
     }
 }
 
-void HandleConcert::getConcertDetails(int id) { 
-    int position = -1;
-    if(getConcertById(id, position) != nullptr) {
-        std::cout << "CONCERT: \n" << "Id: " << concerts.at(position)->id()<< " Group: " << concerts.at(position)->groupName()<< "\n";
-        std::cout << "\tPlace: " << concerts.at(position)->place() << " Date: " << concerts.at(position)->date()<< "\n";
-        std::cout << "\tPrice: " << concerts.at(position)->price() << "$ Available Ticket: " << concerts.at(position)->availableTicket()<< "\n";   
-    } else {
-        std::cout << "No concert found with this id. \n";
-    }
+//Functions to manage preferred
+bool HandleConcert::checkIfPreferredEmpty() {
+    return preferredConcerts.empty();
 }
 
-
-//Functions to manage preferred
-void HandleConcert::addConcertToPreferred(int id) {
-    int position = -1;
-    Concert* found = getConcertById(id, position);
-    if(found != nullptr) {
-        preferredConcerts.push_back(found);
-    } else {
-        std::cout << "Id not found. Impossible to add to preferred. \n";
+Concert* HandleConcert::getPreferredById(int id, int& position) {
+    int i = 0;
+    for(auto it = preferredConcerts.begin(); it != preferredConcerts.end(); it++) {
+        if((*it)->id() == id) {
+            position = i;
+            return *it;
+        }
+        i++;
     }
+    return nullptr;
 }
 
 void HandleConcert::listPreferredConcerts() {
@@ -168,22 +144,15 @@ void HandleConcert::listPreferredConcerts() {
     }
 }
 
-
-bool HandleConcert::checkIfPreferredEmpty() {
-    return preferredConcerts.empty();
-}
-
-bool HandleConcert::checkAddConcertToPreferred() {
-    /*
-    if(num_preferred_concerts < size_preferred){
-        return true;
+void HandleConcert::addConcertToPreferred(int id) {
+    int position = -1;
+    Concert* found = getConcertById(id, position);
+    if(found != nullptr) {
+        preferredConcerts.push_back(found);
     } else {
-        return false;
+        std::cout << "Id not found. Impossible to add to preferred. \n";
     }
-    */
 }
-
-
 
 void HandleConcert::deleteConcertToPreferred(int id) {
     int position = -1;
@@ -197,14 +166,3 @@ void HandleConcert::deleteConcertToPreferred(int id) {
     }
 }
 
-Concert* HandleConcert::getPreferredById(int id, int& position) {
-    int i = 0;
-    for(auto it = preferredConcerts.begin(); it != preferredConcerts.end(); it++) {
-        if((*it)->id() == id) {
-            position = i;
-            return *it;
-        }
-        i++;
-    }
-    return nullptr;
-}
