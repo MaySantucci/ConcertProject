@@ -8,7 +8,6 @@ class HandleConcert {
     public:
     ~HandleConcert();
 
-
     //Functions to manage Concert
     void listConcerts();
     void getConcertDetails(int id);
@@ -16,20 +15,19 @@ class HandleConcert {
     void updateConcert(int id);
     void deleteConcert(int id);
     
-    //Functions to manage Preferred    
-
+    //Functions to manage Preferred
     void addConcertToPreferred(int id);
     void deleteConcertToPreferred(int id);
     void listPreferredConcerts();
+    
+    bool checkIfConcertsEmpty();
+    bool checkIfPreferredEmpty();
 
     private:
     Concert* getConcertById(int id, int& position);
     Concert* getPreferredById(int id, int& position);
 
-    
-    bool checkIfConcertsEmpty();
-    bool checkIfPreferredEmpty();
-    //Concert's variables
+    //variables
     int code = 0;
     
     std::vector<Concert*> concerts;

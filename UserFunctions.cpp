@@ -6,7 +6,6 @@ void UserFunctions::listConcerts() {
     handler->listConcerts();
 }
 
-
 void UserFunctions::detailsConcert(int id) {  
     handler->getConcertDetails(id);
 }
@@ -16,7 +15,6 @@ void UserFunctions::insertConcert() {
 }
 
 void UserFunctions::showForm(){
-
         std::cout << "Group name: " ;
         std::cin.ignore();
         std::getline (std::cin,group_name);
@@ -34,7 +32,6 @@ void UserFunctions::showForm(){
         std::getline (std::cin,available_ticket);
 
         handler->addConcertToConcerts(group_name, place, date, price, available_ticket);
-
 }
 
 bool UserFunctions::checkConcertsInit() {
