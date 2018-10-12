@@ -23,8 +23,6 @@ class HandleConcert {
     
     void getConcertDetails(int id);
 
-    void resizeConcerts();
-
     //Functions to manage Preferred
     
     Concert* getPreferredById(int id, int& position);

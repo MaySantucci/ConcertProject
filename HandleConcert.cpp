@@ -60,64 +60,62 @@ void HandleConcert::addConcertToConcerts(std::string groupName, std::string plac
 }
 
 void HandleConcert::updateConcert(int id) {
-   /*
-    int concert_position = -1;
-    Concert * found = getConcertById(id, concert_position);
-    
-    if(found != nullptr) {        
+    int position = -1;    
+    if(getConcertById(id, position) != nullptr) {        
         std::cout << "Concert found. \n";
-        std::cout << "Id: " << concerts[concert_position]->id() << "\n";
+        std::cout << "Id: " << concerts.at(position)->id() << "\n";
         
         std::string group_name, place, date, price, available_ticket;
         
-        std::cout << "Group name: " << concerts[concert_position]->groupName() << "\n";
+        std::cout << "Group name: " << concerts.at(position)->groupName() << "\n";
         std::cout << "New group name: ";       
         std::cin.ignore();
         std::getline (std::cin,group_name);
         if(!group_name.empty()) {
-            concerts[concert_position]->setGroupName(group_name);
+            concerts.at(position)->setGroupName(group_name);
         }
 
-        std::cout << "Place: " << concerts[concert_position]->place() << "\n";
+        std::cout << "Place: " << concerts.at(position)->place() << "\n";
         std::cout << "New place: " ;
         std::getline (std::cin,place);  
         if(!place.empty()) {
-            concerts[concert_position]->setPlace(place);
+            concerts.at(position)->setPlace(place);
         }             
 
-        std::cout << "Date: " << concerts[concert_position]->date() << "\n";
+        std::cout << "Date: " << concerts.at(position)->date() << "\n";
         std::cout << "New date: " ;
         std::getline (std::cin,date);
         if(!date.empty()) {
-            concerts[concert_position]->setDate(date);
+            concerts.at(position)->setDate(date);
         }
-        std::cout << "Price: " << concerts[concert_position]->price() << "\n";
+        std::cout << "Price: " << concerts.at(position)->price() << "\n";
         std::cout << "New price: " ;
         std::getline (std::cin,price);        
         if(!price.empty()) {
-            concerts[concert_position]->setPrice(price);
+            concerts.at(position)->setPrice(price);
         }
-        std::cout << "Available ticket: " << concerts[concert_position]->availableTicket() << "\n";
+        std::cout << "Available ticket: " << concerts.at(position)->availableTicket() << "\n";
         std::cout << " New available ticket: " ;
         std::getline (std::cin,available_ticket);
         if(!available_ticket.empty()) {
-            concerts[concert_position]->setAvailableTicket(available_ticket);
+            concerts.at(position)->setAvailableTicket(available_ticket);
         }
 
     } else {
         std::cout << "concert not found.";
     }
-    */
 }
 
 
 Concert* HandleConcert::getConcertById(int id, int& position) {   
-    if(!checkIfConcertsEmpty()) {
-        for(int i = 0; i < num_registered_concerts; i++) {
-            if(concerts[i]->id() == id) {
-                position = i;
-                return concerts[i];
+    if(!concerts.empty()) {
+        int pos = 0;
+        for(auto it = concerts.begin(); it != concerts.end(); it++) {
+            if ((*it)->id() == id) {
+                position = pos;
+                return *it;
             }
+            pos ++;
         }
     }
     return nullptr;
@@ -159,38 +157,16 @@ void HandleConcert::deleteConcert(int id) {
 }
 
 void HandleConcert::getConcertDetails(int id) { 
-    int results = 0;
-    for (auto it = concerts.begin(); it != concerts.end(); it++) {
-        if((*it)->id() == id) {
-            std::cout << "CONCERT: \n" << "Id: " << (*it)->id() << " Group: " << (*it)->groupName()<< "\n";
-            std::cout << "\tPlace: " << (*it)->place() << " Date: " << (*it)->date()<< "\n";
-            std::cout << "\tPrice: " << (*it)->price() << "$ Available Ticket: " << (*it)->availableTicket()<< "\n";
-            results ++;
-            break;
-        }
-    }
-
-    if(results == 0) {
-        std::cout << "No concert with this id. \n";
+    int position = -1;
+    if(getConcertById(id, position) != nullptr) {
+        std::cout << "CONCERT: \n" << "Id: " << concerts.at(position)->id()<< " Group: " << concerts.at(position)->groupName()<< "\n";
+        std::cout << "\tPlace: " << concerts.at(position)->place() << " Date: " << concerts.at(position)->date()<< "\n";
+        std::cout << "\tPrice: " << concerts.at(position)->price() << "$ Available Ticket: " << concerts.at(position)->availableTicket()<< "\n";   
+    } else {
+        std::cout << "No concert found with this id. \n";
     }
 }
 
-void HandleConcert::resizeConcerts() {
-    /*
-    int newSizeConcerts = size_concerts * 2;
-    Concert** temp = new Concert* [newSizeConcerts];
-    for (int i = 0; i < newSizeConcerts; i++){
-        if(i < size_concerts) {
-            temp[i] = concerts[i];
-        } else {
-            temp[i] = nullptr;
-        }
-    }
-    delete [] concerts;    
-    size_concerts = newSizeConcerts;
-    concerts = temp;    
-    */   
-}
 
 Concert* HandleConcert::getPreferredById(int id, int& position) {
    /*
