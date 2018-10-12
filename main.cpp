@@ -32,7 +32,8 @@ int main(int argc, char const *argv[])
             user->listConcerts();
         } 
         else if (in == "details" || in == "2") {
-           std::cout << "\t (2) - List details of a concert. \n";   
+           std::cout << "\t (2) - List details of a concert. \n";  
+                      
            if(user->checkConcertsInit()){
                 std::cout << "No concert stored. \n";
            } else {

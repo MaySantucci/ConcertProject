@@ -2,6 +2,7 @@
 #define __HANDLECONCERT_H__
 
 #include "Concert.h"
+#include <vector>
 
 class HandleConcert {
     public:
@@ -43,7 +44,8 @@ class HandleConcert {
     int size_concerts;
     int code = 0;
     
-    Concert** concerts;
+    std::vector<Concert*> concerts;
+    //Concert** concerts;
 
     //Preferred's variables
     int num_preferred_concerts = 0;

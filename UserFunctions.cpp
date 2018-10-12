@@ -12,13 +12,7 @@ void UserFunctions::detailsConcert(int id) {
 }
 
 void UserFunctions::insertConcert() {
-    if(handler->checkAddConcertToConcerts()){
-        showForm();
-    } else {
-        std::cout << "resize.. \n";
-        handler->resizeConcerts();
-        showForm();
-    }
+    showForm();
 }
 
 void UserFunctions::showForm(){
