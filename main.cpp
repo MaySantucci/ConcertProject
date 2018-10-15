@@ -1,4 +1,4 @@
-#include "HandleConcert.h"
+#include "HandleEvent.h"
 #include "UserFunctions.h"
 #include <iostream>
 
@@ -85,8 +85,7 @@ int main(int argc, char const *argv[])
         } 
         else if (in == "delete" || in == "5") {
             std::cout << "\t (5) - Delete event. \n";
-            /*
-            if (!(user->checkConcertsInit())) {
+            if (!(user->checkEventsInit())) {
                 std::string id_sting;
                 int id;
                 std::cout << "Id: " ;
@@ -94,7 +93,7 @@ int main(int argc, char const *argv[])
                 try {                    
                     id = stoi(id_sting);      
 
-                    user->deleteConcert(id);
+                    user->deleteEvent(id);
 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
@@ -102,12 +101,11 @@ int main(int argc, char const *argv[])
 
             } else {
                 std::cout << "No concerts. \n";
-            } */
+            } 
         } 
         else if (in == "star" || in == "6") {
             std::cout << "\t (6) - Add preferred event. \n";
-            /*
-            if (!(user->checkConcertsInit())) {
+            if (!(user->checkEventsInit())) {
                 std::string id_sting;
                 int id;
                 std::cout << "Id: " ;
@@ -115,7 +113,7 @@ int main(int argc, char const *argv[])
                 try {                    
                     id = stoi(id_sting);          
 
-                    user->insertPreferred(id);
+                    user->insertPreferredEvent(id);
 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
@@ -124,12 +122,10 @@ int main(int argc, char const *argv[])
             } else {
                 std::cout << "No concerts. \n";
             }
-            */
         } 
         else if (in == "unstar" || in == "7") {
             std::cout << "\t (7) - Remove preferred event. \n";
-            /*
-            if (!(user->checkPreferredInit())) {
+            if (!(user->checkPreferredEventsInit())) {
                 std::string id_sting;
                 int id;
                 std::cout << "Id: " ;
@@ -137,20 +133,19 @@ int main(int argc, char const *argv[])
                 try {                    
                     id = stoi(id_sting);      
 
-                    user->deletePreferred(id);
+                    user->deletePreferredEvent(id);
 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
                 }
 
             } else {
-                std::cout << "No concerts. \n";
+                std::cout << "No events. \n";
             }
-            */
         } 
         else if (in == "listar" || in == "8") {
             std::cout << "\t (8) - List all preferred event. \n";
-           // user->listPreferredConcerts();
+            user->listPreferredEvents();
         } 
         else if (in == "exit" || in == "9") {
             std::cout << "\t (9) - Close the app. \n";

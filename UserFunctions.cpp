@@ -7,7 +7,6 @@
 void UserFunctions::listEvents() {
     handler->listEvents();
 }
-
 void UserFunctions::showForm(std::string& n, std::string& pl, std::string& d, std::string& pr, std::string& ticket){
         std::cout << "name: " ;
         std::cin.ignore();
@@ -24,10 +23,7 @@ void UserFunctions::showForm(std::string& n, std::string& pl, std::string& d, st
 
         std::cout << "Available ticket: " ;
         std::getline (std::cin, ticket);
-
-        handler->addConcertToConcerts(n, pl, d, pr, ticket);
 }
-
 void UserFunctions::insertEvent(std::string type_event) {
     showForm(name, place, date, price, availableTicket);
 
@@ -45,58 +41,29 @@ void UserFunctions::insertEvent(std::string type_event) {
         handler->addConcertToEvents(name, place, date, price, availableTicket);
     }
 }
-
 bool UserFunctions::checkEventsInit(){
     return handler->checkIfEventsEmpty();
 }
-
 void UserFunctions::detailsEvent(int id) {
     handler->getEventDetails(id);
 }
-
 void UserFunctions::updateEvent(int id) {
     handler->updateEvent(id);
 }
-
-//Functions to manage Concerts
-void UserFunctions::listConcerts() {
-    handler->listConcerts();
+void UserFunctions::deleteEvent(int id){
+    handler->removeEvent(id);
 }
 
-void UserFunctions::detailsConcert(int id) {  
-    handler->getConcertDetails(id);
+//Functions to manage Preferred Events
+void UserFunctions::listPreferredEvents() {
+    handler->listPreferredEvents();
 }
-
-void UserFunctions::insertConcert() {
-    //showForm();
+bool UserFunctions::checkPreferredEventsInit() {
+    return handler->checkIfPreferredEventsEmpty();
 }
-
-
-bool UserFunctions::checkConcertsInit() {
-    handler->checkIfConcertsEmpty();
+void UserFunctions::insertPreferredEvent(int id) {
+    handler->addToPreferred(id);
 }
-
-void UserFunctions::updateConcert(int id) {
-    handler->updateConcert(id);
-}
-
-void UserFunctions::deleteConcert(int id) {
-    handler->deleteConcert(id);
-}
-
-//Functions to manage Preferred
-void UserFunctions::listPreferredConcerts() {
-    handler->listPreferredConcerts();
-}
-
-bool UserFunctions::checkPreferredInit() {
-    handler->checkIfPreferredEmpty();
-}
-
-void UserFunctions::insertPreferred(int id) {
-        handler->addConcertToPreferred(id);
-}
-
-void UserFunctions::deletePreferred(int id){
-    handler->deleteConcertToPreferred(id);
-}
+void UserFunctions::deletePreferredEvent(int id) {
+    handler->removeFromPreferred(id);
+} 
