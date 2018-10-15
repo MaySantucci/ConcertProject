@@ -1,19 +1,19 @@
 #include "Concert.h"
  Concert::Concert(int id, std::string name, std::string place, std::string date, std::string price, std::string availableTicket): Event {id, name, place, date, price, availableTicket} {};
 
-void Concert::setName(std::string groupName) {
-    Event::name() = groupName;
+void Concert::setName(std::string name) {
+    Event::setName(name);
 }
 void Concert::setPlace(std::string place) {
-    Event::place() = place;
+    Event::setPlace(place);
 }
 void Concert::setDate(std::string date) {
-    Event::date() = date;
+    Event::setDate(date);
 }
 void Concert::setPrice(std::string price) {
-    Event::price() = price;
+    Event::setPrice(price);
 }
 void Concert::setAvailableTicket(std::string availableTicket) {
-    Event::availableTicket() = availableTicket;
+    Event::setAvailableTicket(availableTicket);
 }
 

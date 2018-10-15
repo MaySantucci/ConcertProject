@@ -32,3 +32,20 @@ std::string Event::price() {
 std::string Event::availableTicket() {
     return m_availableTicket;
 }
+
+// setter methods
+void Event::setName(std::string name) {
+    m_name = name;
+}
+void Event::setPlace(std::string place) {
+    m_place = place;
+}
+void Event::setDate(std::string date) {
+    m_date = date;
+}
+void Event::setPrice(std::string price) {
+    m_price = price;
+}
+void Event::setAvailableTicket(std::string availableTicket) {
+    m_availableTicket = availableTicket;
+}

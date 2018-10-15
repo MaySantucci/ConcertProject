@@ -18,6 +18,12 @@ class HandleConcert {
     void addBalletToEvents(std::string name, std::string place, std::string date, std::string price, std::string availableTicket);
     void addConcertToEvents(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket);
 
+    bool checkIfEventsEmpty();
+    Event* getEventById(int id, int& position);
+    void getEventDetails(int id);
+
+    void updateEvent(int id);
+
     //Functions to manage Concert
     void listConcerts();
     void getConcertDetails(int id);

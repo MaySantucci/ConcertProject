@@ -33,9 +33,8 @@ int main(int argc, char const *argv[])
         } 
         else if (in == "details" || in == "2") {
            std::cout << "\t (2) - List details of a event. \n";  
-            /*
-             if(user->checkConcertsInit()){
-                std::cout << "No concert stored. \n";
+             if(user->checkEventsInit()) {
+                std::cout << "No events stored. \n";
             } else {
                 std::string id_sting;
                 int id;
@@ -43,18 +42,16 @@ int main(int argc, char const *argv[])
                 std::cin >> id_sting;
                 try {                    
                     id = stoi(id_sting);             
-                    user->detailsConcert(id); 
+                    user->detailsEvent(id); 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
                 }
-           }
-           */
-          
+           }          
         } 
         else if (in == "insert" || in == "3") {
             std::cout << "\t (3) - Insert event. \n";
             
-    std::cout << "What kind of event do you want add? \n" <<
+            std::cout << "What kind of event do you want add? \n" <<
                 "\t(a) - Show; \n" <<
                 "\t(b) - Ballet; \n" <<
                 "\t(c) - Concert. \n";   
@@ -71,9 +68,8 @@ int main(int argc, char const *argv[])
         } 
         else if (in == "update" || in == "4") {
             std::cout << "\t (4) - Update event. \n";
-            /*
-             if(user->checkConcertsInit()){
-                std::cout << "No concert stored. \n";
+             if(user->checkEventsInit()){
+                std::cout << "No event stored. \n";
            } else {
                 std::string id_sting;
                 int id;
@@ -81,12 +77,11 @@ int main(int argc, char const *argv[])
                 std::cin >> id_sting;
                 try {                    
                     id = stoi(id_sting);             
-                    user->updateConcert(id); 
+                    user->updateEvent(id); 
                 } catch (std::invalid_argument) {
                     std::cout << "Invalid id. Print a number. \n";
                 }
            }
-           */
         } 
         else if (in == "delete" || in == "5") {
             std::cout << "\t (5) - Delete event. \n";

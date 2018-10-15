@@ -8,38 +8,6 @@ void UserFunctions::listEvents() {
     handler->listEvents();
 }
 
-void UserFunctions::insertEvent(std::string type_event) {
-    showForm(name, place, date, price, availableTicket);
-
-    if(type_event == "a") {
-        //add Show to Events
-        std::cout << "Show. \n";
-        handler->addShowToEvents(name, place, date, price, availableTicket);
-    } else if (type_event == "b") {
-        //add Ballet to Events
-        std::cout << "Ballet. \n";
-        handler->addBalletToEvents(name, place, date, price, availableTicket);        
-    } else if (type_event == "c") {
-        //add Concert to Events        
-        std::cout << "Concert. \n";
-        handler->addConcertToEvents(name, place, date, price, availableTicket);
-    }
-}
-
-
-//Functions to manage Concerts
-void UserFunctions::listConcerts() {
-    handler->listConcerts();
-}
-
-void UserFunctions::detailsConcert(int id) {  
-    handler->getConcertDetails(id);
-}
-
-void UserFunctions::insertConcert() {
-    //showForm();
-}
-
 void UserFunctions::showForm(std::string& n, std::string& pl, std::string& d, std::string& pr, std::string& ticket){
         std::cout << "name: " ;
         std::cin.ignore();
@@ -59,6 +27,50 @@ void UserFunctions::showForm(std::string& n, std::string& pl, std::string& d, st
 
         handler->addConcertToConcerts(n, pl, d, pr, ticket);
 }
+
+void UserFunctions::insertEvent(std::string type_event) {
+    showForm(name, place, date, price, availableTicket);
+
+    if(type_event == "a") {
+        //add Show to Events
+        std::cout << "Show. \n";
+        handler->addShowToEvents(name, place, date, price, availableTicket);
+    } else if (type_event == "b") {
+        //add Ballet to Events
+        std::cout << "Ballet. \n";
+        handler->addBalletToEvents(name, place, date, price, availableTicket);        
+    } else if (type_event == "c") {
+        //add Concert to Events        
+        std::cout << "Concert. \n";
+        handler->addConcertToEvents(name, place, date, price, availableTicket);
+    }
+}
+
+bool UserFunctions::checkEventsInit(){
+    return handler->checkIfEventsEmpty();
+}
+
+void UserFunctions::detailsEvent(int id) {
+    handler->getEventDetails(id);
+}
+
+void UserFunctions::updateEvent(int id) {
+    handler->updateEvent(id);
+}
+
+//Functions to manage Concerts
+void UserFunctions::listConcerts() {
+    handler->listConcerts();
+}
+
+void UserFunctions::detailsConcert(int id) {  
+    handler->getConcertDetails(id);
+}
+
+void UserFunctions::insertConcert() {
+    //showForm();
+}
+
 
 bool UserFunctions::checkConcertsInit() {
     handler->checkIfConcertsEmpty();
