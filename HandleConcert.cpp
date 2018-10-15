@@ -1,6 +1,34 @@
 #include "HandleConcert.h"
-#include "Concert.h"
 #include <iostream>
+
+//Functions to manage Events
+void HandleConcert::listEvents() {
+
+    if(events.empty()) {
+        std::cout << "No events stored. \n";
+    } else {
+        std::cout << "EVENTS: \n";
+        for(auto it = events.begin(); it != events.end(); it++) {
+            std::cout << "Id: " << (*it)->id() << " Group: " << (*it)->name()<< "\n";
+        }
+    }
+
+}
+void HandleConcert::addShowToEvents(std::string name, std::string place, std::string date, std::string price, std::string availableTicket) {
+    Show* showToAdd = new Show (code, name, place, date, price, availableTicket);
+    events.push_back(showToAdd);
+    code++;  
+}
+void HandleConcert::addBalletToEvents(std::string name, std::string place, std::string date, std::string price, std::string availableTicket) {
+    Ballet* balletToAdd = new Ballet (code, name, place, date, price, availableTicket);
+    events.push_back(balletToAdd);
+    code++;  
+}
+void HandleConcert::addConcertToEvents(std::string groupName, std::string place, std::string date, std::string price, std::string availableTicket) {
+    Concert* concertToAdd = new Concert (code, groupName, place, date, price, availableTicket);
+    events.push_back(concertToAdd);
+    code++;  
+}
 
 
 //Functions to manage Concerts

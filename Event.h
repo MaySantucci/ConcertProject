@@ -1,4 +1,5 @@
-
+#ifndef __EVENT_H__
+#define __EVENT_H__
 #include <iostream>
 
 class Event {
@@ -28,3 +29,4 @@ class Event {
     std::string m_price;
     std::string m_availableTicket;
 };
+#endif

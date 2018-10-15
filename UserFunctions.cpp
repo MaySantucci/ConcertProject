@@ -4,18 +4,25 @@
 
 //Functions to manage Events
 
+void UserFunctions::listEvents() {
+    handler->listEvents();
+}
+
 void UserFunctions::insertEvent(std::string type_event) {
     showForm(name, place, date, price, availableTicket);
 
     if(type_event == "a") {
         //add Show to Events
         std::cout << "Show. \n";
+        handler->addShowToEvents(name, place, date, price, availableTicket);
     } else if (type_event == "b") {
-        //add Ballet to Events        
+        //add Ballet to Events
         std::cout << "Ballet. \n";
+        handler->addBalletToEvents(name, place, date, price, availableTicket);        
     } else if (type_event == "c") {
         //add Concert to Events        
         std::cout << "Concert. \n";
+        handler->addConcertToEvents(name, place, date, price, availableTicket);
     }
 }
 

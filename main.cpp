@@ -28,8 +28,8 @@ int main(int argc, char const *argv[])
         in = std::string(input);
 
         if (in == "list" || in == "1") {
-            std::cout << "\t (1) - List all concerts. \n";
-           // user->listConcerts();
+            std::cout << "\t (1) - List all events. \n";
+            user->listEvents();
         } 
         else if (in == "details" || in == "2") {
            std::cout << "\t (2) - List details of a event. \n";  
