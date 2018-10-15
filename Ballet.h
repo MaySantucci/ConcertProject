@@ -1,11 +1,11 @@
-#ifndef __CONCERT_H__
-#define __CONCERT_H__
+#ifndef __BALLET_H__
+#define __BALLET_H__
 #include "Event.h"
 #include <string>
 #include <iostream>
-class Concert : public Event {
+class Ballet : public Event {
     public:    
-    Concert(int id, std::string name, std::string place, std::string date, std::string price, std::string availableTicket);
+    Ballet(int id, std::string name, std::string place, std::string date, std::string price, std::string availableTicket);
     
     //setter methods
     virtual void setName(std::string name);
