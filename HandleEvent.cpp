@@ -208,33 +208,41 @@ void HandleEvent::addExtra(int id) {
         if(dynamic_cast<Show*>(events[position])) {                
             std::cout << "SHOW. \n";
             std::vector<std::string> att = events[position]->allowedAttributes();
-            for(auto it = att.begin(); it != att.end(); it++) {
-                std::cout << *it << ": \n";
-                std::cin.ignore();
-                std::getline (std::cin, results);
-                events[position]->setAttributes(*it, results);
-            }
+            formExtra(att, position);
         } else if(dynamic_cast<Ballet*>(events[position])) {       
             std::cout << "BALLET. \n";
             std::vector<std::string> att = events[position]->allowedAttributes();
-            for(auto it = att.begin(); it != att.end(); it++) {
-                std::cout << *it << ": \n";
-                std::cin.ignore();
-                std::getline (std::cin, results);
-                events[position]->setAttributes(*it, results);
-            }           
+            formExtra(att, position);  
         } else if(dynamic_cast<Concert*>(events[position])) {      
             std::cout << "CONCERT. \n"; 
             std::vector<std::string> att = events[position]->allowedAttributes();
-            for(auto it = att.begin(); it != att.end(); it++) {
-                std::cout << *it << ": \n";
-                std::cin.ignore();
-                std::getline (std::cin, results);
-                events[position]->setAttributes(*it, results);
-            }             
+            formExtra(att, position);       
 
         } 
     } else {
         std::cout << "event not found. \n";
+    }
+}
+
+void HandleEvent::formExtra(std::vector<std::string>& att, int position) {
+    std::string results;
+    for(auto it = att.begin(); it != att.end(); it++) {
+        std::cout << *it << ": ";
+        std::cin.ignore();
+        std::getline (std::cin, results);
+        events[position]->setAttributes(*it, results);
+    }
+
+}
+
+void HandleEvent::printExtra(int id) {
+    int position = -1;
+    if(getEventById(id, position) != nullptr) {
+        std::map<std::string, std::string>::iterator it;
+        for (it = events[position]->attributes().begin(); it != events[position]->attributes().end(); it++) {
+            std::cout << it->first << ": " << it->second << "\n";
+        }
+    } else {
+        std::cout << "Id not found. \n";
     }
 }

@@ -34,6 +34,9 @@ class HandleEvent {
 
     //Function to manage ExtraInfo
     void addExtra(int id);
+    void printExtra(int id);
+
+    void formExtra(std::vector<std::string>& att, int position);
 
     //variables
     int code = 0;

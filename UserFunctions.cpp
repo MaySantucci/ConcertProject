@@ -29,6 +29,10 @@ void UserFunctions::addExtraInfo(int id) {
     handler->addExtra(id);
 }
 
+void UserFunctions::listExtraInfo(int id) {
+    handler->printExtra(id);
+}
+
 void UserFunctions::insertEvent(std::string type_event) {
     showForm(name, place, date, price, availableTicket);
 
