@@ -34,6 +34,9 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "vector": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "map": "cpp",
+        "tuple": "cpp",
+        "xtree": "cpp"
     }
 }

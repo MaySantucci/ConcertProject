@@ -32,6 +32,9 @@ class HandleEvent {
     Event* getPreferredById(int id, int& position);
     void removeFromPreferred(int id);
 
+    //Function to manage ExtraInfo
+    void addExtra(int id);
+
     //variables
     int code = 0;
 

@@ -24,6 +24,11 @@ void UserFunctions::showForm(std::string& n, std::string& pl, std::string& d, st
         std::cout << "Available ticket: " ;
         std::getline (std::cin, ticket);
 }
+
+void UserFunctions::addExtraInfo(int id) {
+    handler->addExtra(id);
+}
+
 void UserFunctions::insertEvent(std::string type_event) {
     showForm(name, place, date, price, availableTicket);
 

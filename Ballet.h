@@ -8,6 +8,8 @@ class Ballet : public Event
 public:
   Ballet(int id, std::string name, std::string place, std::string date,
          std::string price, std::string availableTicket);
+  
+    std::vector<std::string> allowedAttributes() override;
 };
 
 #endif

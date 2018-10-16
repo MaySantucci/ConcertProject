@@ -1,6 +1,7 @@
 #include "HandleEvent.h"
 #include "UserFunctions.h"
 #include <iostream>
+#include <map>
 
 int main(int argc, char const *argv[])
 {
@@ -19,8 +20,9 @@ int main(int argc, char const *argv[])
         "\t (5) - delete - Delete event. \n" <<
         "\t (6) - star - Add preferred event. \n"<<
         "\t (7) - unstar - Remove preferred event. \n" <<
-        "\t (8) - listar - List all preferred event. \n"
-        "\t (9) - exit - Close the app. \n" ;
+        "\t (8) - listar - List all preferred event. \n" <<
+        "\t (9) - extrainfo - Add more information to an event. \n"
+        "\t (10) - exit - Close the app. \n" ;
 
         std::cout << "Please enter your choice: ";
 
@@ -147,8 +149,29 @@ int main(int argc, char const *argv[])
             std::cout << "\t (8) - List all preferred event. \n";
             user->listPreferredEvents();
         } 
-        else if (in == "exit" || in == "9") {
-            std::cout << "\t (9) - Close the app. \n";
+        else if (in == "extrainfo" || in == "9") {
+            std::cout << "\t (9) - Extra Info. \n";
+            if (!(user->checkEventsInit())) {
+                std::string id_sting;
+                int id;
+                std::cout << "Id: " ;
+                std::cin >> id_sting;
+                try {                    
+                    id = stoi(id_sting);      
+
+                    user->addExtraInfo(id);
+
+                } catch (std::invalid_argument) {
+                    std::cout << "Invalid id. Print a number. \n";
+                }
+
+            } else {
+                std::cout << "No events stored. \n";
+            }
+            
+        } 
+        else if (in == "exit" || in == "10") {
+            std::cout << "\t (10) - Close the app. \n";
             break;
         } 
         else {

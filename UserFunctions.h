@@ -21,6 +21,9 @@ class UserFunctions {
     void insertPreferredEvent(int id);
     void deletePreferredEvent(int id);
 
+    //Function to add MetaData
+    void addExtraInfo(int id);
+
     private:
     std::string name, place, date, price, availableTicket;
  };
