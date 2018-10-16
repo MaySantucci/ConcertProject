@@ -16,8 +16,8 @@ void HandleEvent::listEvents() {
         std::cout << "EVENTS: \n";
         for(auto it = events.begin(); it != events.end(); it++) {
             
-            std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()<< "\n";
-           /* if(dynamic_cast<Show*>(*it)) {                
+            //std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()<< "\n";
+            if(dynamic_cast<Show*>(*it)) {                
                 std::cout << "Id: " << (*it)->id() << " Show: " << (*it)->name()<< "\n";
             } else if(dynamic_cast<Ballet*>(*it)) {                
                 std::cout << "Id: " << (*it)->id() << " Ballet: " << (*it)->name()<< "\n";
@@ -26,7 +26,7 @@ void HandleEvent::listEvents() {
             } else {
                 std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()<< "\n";
             }
-            */
+        
         }
     }
 
@@ -65,15 +65,16 @@ void HandleEvent::getEventDetails(int id) {
     Event* found = getEventById(id, position); 
     if(found != nullptr) {   
         
-        std::cout << "Id: " << (found)->id() << " Event: " << (found)->name()<< "\n";
-        /*    
+        //std::cout << "Id: " << (found)->id() << " Event: " << (found)->name()<< "\n";
+           
         if(dynamic_cast<Show*>(found)) {                
             std::cout << "Id: " << (found)->id() << "\tShow: " << (found)->name()<< "\n";
         } else if(dynamic_cast<Ballet*>(found)) {                
             std::cout << "Id: " << (found)->id() << "\tBallet: " << (found)->name()<< "\n";
         } else if(dynamic_cast<Concert*>(found)) {                
             std::cout << "Id: " << (found)->id() << "\tConcert: " << (found)->name()<< "\n";
-        } */
+        } 
+
         std::cout << "\tDate: " << found->date() << "\n";
         std::cout << "\tPlace: " << found->place() << "\n";
         std::cout << "\tPrice: " << found->price() << "\tAvailable Ticket: " << found->availableTicket() << "\n";
@@ -161,7 +162,7 @@ void HandleEvent::listPreferredEvents() {
     } else {
          std::cout << "FAVOURITE EVENTS: \n"; 
         for (auto it = preferredEvents.begin(); it != preferredEvents.end(); it++) {               
-          /*
+          
             if(dynamic_cast<Show*>(*it)) {                
                 std::cout << "Id: " << (*it)->id() << " Show: " << (*it)->name()<< "\n";
             } else if(dynamic_cast<Ballet*>(*it)) {                
@@ -169,9 +170,8 @@ void HandleEvent::listPreferredEvents() {
             } else if(dynamic_cast<Concert*>(*it)) {                
                 std::cout << "Id: " << (*it)->id() << " Concert: " << (*it)->name()<< "\n";
             } 
-            */
             
-            std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()<< "\n";
+           // std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()<< "\n";
             std::cout << "\tPlace: " << (*it)->place() << " Date: " << (*it)->date()<< "\n";
             std::cout << "\tPrice: " << (*it)->price() << "$ Available Ticket: " << (*it)->availableTicket()<< "\n";      
         }
@@ -202,21 +202,36 @@ void HandleEvent::removeFromPreferred(int id) {
 void HandleEvent::addExtra(int id) {
     int position = -1;
     if(getEventById(id, position) != nullptr) {
-        std::cout << "event found. \n";
-        
-        //std::vector<std::string> att = events[position]->allowedAttributes();
-        //if(!att.empty()) {
-        //    for (auto it = att.begin(); it != att.end(); it ++) {
-        //        std::cout << "attribute: " << it->data() << "\n";
-        //    }
-        //}
+        std::cout << "event found. \n";        
+        std::string results;
 
         if(dynamic_cast<Show*>(events[position])) {                
             std::cout << "SHOW. \n";
+            std::vector<std::string> att = events[position]->allowedAttributes();
+            for(auto it = att.begin(); it != att.end(); it++) {
+                std::cout << *it << ": \n";
+                std::cin.ignore();
+                std::getline (std::cin, results);
+                events[position]->setAttributes(*it, results);
+            }
         } else if(dynamic_cast<Ballet*>(events[position])) {       
-            std::cout << "BALLET. \n";           
+            std::cout << "BALLET. \n";
+            std::vector<std::string> att = events[position]->allowedAttributes();
+            for(auto it = att.begin(); it != att.end(); it++) {
+                std::cout << *it << ": \n";
+                std::cin.ignore();
+                std::getline (std::cin, results);
+                events[position]->setAttributes(*it, results);
+            }           
         } else if(dynamic_cast<Concert*>(events[position])) {      
-            std::cout << "CONCERT. \n";              
+            std::cout << "CONCERT. \n"; 
+            std::vector<std::string> att = events[position]->allowedAttributes();
+            for(auto it = att.begin(); it != att.end(); it++) {
+                std::cout << *it << ": \n";
+                std::cin.ignore();
+                std::getline (std::cin, results);
+                events[position]->setAttributes(*it, results);
+            }             
 
         } 
     } else {

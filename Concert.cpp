@@ -8,7 +8,5 @@ std::vector<std::string> Concert::allowedAttributes() {
     std::vector<std::string> attributes;
     attributes.push_back("artist");
     attributes.push_back("genre");
-    setAttributes("artist", nullptr);
-    setAttributes("genre", nullptr);
     return attributes;
 }

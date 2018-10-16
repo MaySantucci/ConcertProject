@@ -7,7 +7,5 @@ std::vector<std::string> Ballet::allowedAttributes() {
     std::vector<std::string> attributes;
     attributes.push_back("first_dancer");
     attributes.push_back("num_dancers");
-    setAttributes("first_dancer", nullptr);
-    setAttributes("num_dancers", nullptr);
     return attributes;
 }
