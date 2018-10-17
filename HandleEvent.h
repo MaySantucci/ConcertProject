@@ -38,7 +38,7 @@ class HandleEvent {
     void updateExtra(int id);
     void deleteExtra (int id);
 
-    void formExtra(std::vector<std::string>& att, int position);
+    void formExtra(std::vector<std::string>& att, int position, std::string type);
 
     //variables
     int code = 0;

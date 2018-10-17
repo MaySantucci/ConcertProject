@@ -60,7 +60,7 @@ void Event::setAttributes(std::string key, std::string value) {
 }
 
 void Event::updateAttributes(std::string key, std::string value) {
-    m_attributes.begin()->second = value;
+    m_attributes[key] = value;
 }
 
 void Event::removeAttributes() {

@@ -207,21 +207,19 @@ void HandleEvent::removeFromPreferred(int id) {
 void HandleEvent::addExtra(int id) {
     int position = -1;
     if(getEventById(id, position) != nullptr) {
-        std::cout << "event found. \n";        
-        std::string results;
-
+        std::cout << "event found. \n";       
         if(dynamic_cast<Show*>(events[position])) {                
             std::cout << "SHOW. \n";
             std::vector<std::string> att = events[position]->allowedAttributes();
-            formExtra(att, position);
+            formExtra(att, position, "add");
         } else if(dynamic_cast<Ballet*>(events[position])) {       
             std::cout << "BALLET. \n";
             std::vector<std::string> att = events[position]->allowedAttributes();
-            formExtra(att, position);  
+            formExtra(att, position, "add");
         } else if(dynamic_cast<Concert*>(events[position])) {      
             std::cout << "CONCERT. \n"; 
             std::vector<std::string> att = events[position]->allowedAttributes();
-            formExtra(att, position);       
+            formExtra(att, position, "add");
 
         } 
     } else {
@@ -229,13 +227,17 @@ void HandleEvent::addExtra(int id) {
     }
 }
 
-void HandleEvent::formExtra(std::vector<std::string>& att, int position) {
+void HandleEvent::formExtra(std::vector<std::string>& att, int position, std::string type) {
     std::string results;
     for(auto it = att.begin(); it != att.end(); it++) {
         std::cout << *it << ": ";
         std::cin.ignore();
         std::getline (std::cin, results);
-        events[position]->setAttributes(*it, results);
+        if (type == "add") {
+            events[position]->setAttributes(*it, results);
+        } else if (type == "up") {            
+            events[position]->updateAttributes(*it, results);
+        }
     }
 
 }
@@ -255,14 +257,8 @@ void HandleEvent::printExtra(int id) {
 void HandleEvent::updateExtra(int id) {
     int position = -1;
     if(getEventById(id, position) != nullptr) {
-        std::string results;
         std::vector<std::string> att = events[position]->allowedAttributes();
-        for(auto it = att.begin(); it != att.end(); it++) {
-            std::cout << *it << ": ";
-            std::cin.ignore();
-            std::getline (std::cin, results);
-            events[position]->updateAttributes(*it, results);
-    }
+        formExtra(att, position, "up");
     } else {
         std::cout << "No extra. \n";
     }
