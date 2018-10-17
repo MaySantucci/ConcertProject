@@ -137,7 +137,7 @@ void HandleEvent::updateEvent(int id) {
 }
 void HandleEvent::removeEvent(int id) {
     int position = -1;
-    if(getPreferredById(id, position) != nullptr) {
+    if(getEventById(id, position) != nullptr) {
         removeFromPreferred(id);
         delete events.at(position);
         events.erase(events.begin() + position);
@@ -198,7 +198,7 @@ void HandleEvent::removeFromPreferred(int id) {
     if(getPreferredById(id, position) != nullptr) {
         preferredEvents.erase(preferredEvents.begin() + position);
     } else {
-        std::cout << "Event not found with this id. \n";
+        std::cout << "PREFERRED: Event not found with this id. \n";
     }
 }
 
