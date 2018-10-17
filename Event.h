@@ -31,6 +31,8 @@ class Event
     std::map<std::string, std::string> attributes() const;    
     // metadata setter
     void setAttributes(std::string key, std::string value);
+    void updateAttributes(std::string key, std::string value);
+    void removeAttributes();
 
   private:
     int m_id;

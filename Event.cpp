@@ -55,8 +55,14 @@ void Event::setAvailableTicket(const std::string& availableTicket) {
 }
 
 void Event::setAttributes(std::string key, std::string value) {
-    //TODO: populate map with key and value 
-    std::map<std::string, std::string>::iterator it; 
-    it = m_attributes.begin();
-    m_attributes.insert(it, std::pair<std::string, std::string>(key, value));
+    std::cout << "Add attribute.\n";
+    m_attributes.insert(std::pair<std::string, std::string>(key, value));
+}
+
+void Event::updateAttributes(std::string key, std::string value) {
+    m_attributes.begin()->second = value;
+}
+
+void Event::removeAttributes() {
+    m_attributes.clear();
 }

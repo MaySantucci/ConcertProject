@@ -79,6 +79,11 @@ void HandleEvent::getEventDetails(int id) {
         std::cout << "\tPlace: " << found->place() << "\n";
         std::cout << "\tPrice: " << found->price() << "\tAvailable Ticket: " << found->availableTicket() << "\n";
 
+        if (!found->attributes().empty()) {
+            std::cout << "EXTRA INFO: \n";
+            printExtra(id);
+        }
+
     } else {
         std::cout << "Event not found. \n";
     }    
@@ -243,6 +248,33 @@ void HandleEvent::printExtra(int id) {
             std::cout << it->first << ": " << it->second << "\n";
         }
     } else {
-        std::cout << "Id not found. \n";
+        std::cout << "There are not any extra information. \n";
+    }
+}
+
+void HandleEvent::updateExtra(int id) {
+    int position = -1;
+    if(getEventById(id, position) != nullptr) {
+        std::string results;
+        std::vector<std::string> att = events[position]->allowedAttributes();
+        for(auto it = att.begin(); it != att.end(); it++) {
+            std::cout << *it << ": ";
+            std::cin.ignore();
+            std::getline (std::cin, results);
+            events[position]->updateAttributes(*it, results);
+    }
+    } else {
+        std::cout << "No extra. \n";
+    }
+}
+
+void HandleEvent::deleteExtra(int id) {
+    int pos = -1;
+    if(getEventById(id, pos) != nullptr){
+        events[pos]->removeAttributes();
+
+        std::cout << "Extra deleted. \n";
+    } else {
+        std::cout << "No extra information in this element. \n";
     }
 }

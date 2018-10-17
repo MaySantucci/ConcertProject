@@ -24,6 +24,8 @@ class UserFunctions {
     //Function to add MetaData
     void addExtraInfo(int id);
     void listExtraInfo(int id);
+    void updateExtraInfo(int id);
+    void deleteExtraInfo(int id);
 
     private:
     std::string name, place, date, price, availableTicket;

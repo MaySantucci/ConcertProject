@@ -23,7 +23,9 @@ int main(int argc, char const *argv[])
         "\t (8) - listar - List all preferred event. \n" <<
         "\t (9) - extrainfo - Add more information to an event. \n" <<
         "\t (10) - listextra - List extra information of an event. \n" <<
-        "\t (11) - exit - Close the app. \n" ;
+        "\t (11) - upextra - Update extra information of an event. \n" <<
+        "\t (12) - dextra - Delete extra information of an event. \n" <<
+        "\t (13) - exit - Close the app. \n" ;
 
         std::cout << "Please enter your choice: ";
 
@@ -191,8 +193,48 @@ int main(int argc, char const *argv[])
                 std::cout << "No events stored. \n";
             }
         }  
-        else if (in == "exit" || in == "11") {
-            std::cout << "\t (11) - Close the app. \n";
+        else if (in == "upextra" || in == "11") {
+            std::cout << "\t (11) - Update extra information. \n";
+            if (!(user->checkEventsInit())) {
+                std::string id_sting;
+                int id;
+                std::cout << "Id: " ;
+                std::cin >> id_sting;
+                try {                    
+                    id = stoi(id_sting);      
+
+                    user->updateExtraInfo(id);
+
+                } catch (std::invalid_argument) {
+                    std::cout << "Invalid id. Print a number. \n";
+                }
+
+            } else {
+                std::cout << "No events stored. \n";
+            }
+        }  
+        else if (in == "dextra" || in == "12") {
+            std::cout << "\t (12) - Delete extra information. \n";
+            if (!(user->checkEventsInit())) {
+                std::string id_sting;
+                int id;
+                std::cout << "Id: " ;
+                std::cin >> id_sting;
+                try {                    
+                    id = stoi(id_sting);      
+
+                    user->deleteExtraInfo(id);
+
+                } catch (std::invalid_argument) {
+                    std::cout << "Invalid id. Print a number. \n";
+                }
+
+            } else {
+                std::cout << "No events stored. \n";
+            }
+        }  
+        else if (in == "exit" || in == "13") {
+            std::cout << "\t (13) - Close the app. \n";
             break;
         } 
         else {
