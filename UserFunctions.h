@@ -6,14 +6,17 @@
 
 class UserFunctions {
     public: 
+    int codeEvent = 0;
     //Function to manage Events 
     void listEvents();
     void detailsEvent(int id);
 
     void insertEvent(std::string type_event);    
     void showForm(std::string& n, std::string& pl, std::string& d, std::string& pr, std::string& ticket);
-
     bool checkEventsInit();
+
+    void printDetails(Event* e);
+
     void updateEvent(int id);
     void deleteEvent(int id);
 

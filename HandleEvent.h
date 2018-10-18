@@ -15,8 +15,6 @@ public:
   std::vector<E *> events;
   std::vector<E *> preferredEvents;
 
-  int code = 0;
-
   HandleEvent() { vendor = new T; };
   ~HandleEvent() {
     for (int i = 0; i < events.size(); i++) {
@@ -27,10 +25,9 @@ public:
   // Functions to manage Events
   std::vector<E *> listEvents() { return events; };
 
-  void addEventToEvents(std::string name, std::string place, std::string date,
+  void addEventToEvents(int code, std::string name, std::string place, std::string date,
                         std::string price, std::string availableTicket) {
     events.push_back(new E(code, name, place, date, price, availableTicket));
-    code++;
 
     std::cout << "Size: " << events.size() << "\n";
   };
