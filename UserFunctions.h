@@ -2,7 +2,7 @@
 
 class UserFunctions {
     public: 
-    HandleEvent* handler = new HandleEvent();
+    HandleEvent<Vendor>* handler = new HandleEvent();
 
     //Function to manage Events 
     void listEvents();
@@ -26,6 +26,8 @@ class UserFunctions {
     void listExtraInfo(int id);
     void updateExtraInfo(int id);
     void deleteExtraInfo(int id);
+
+    void buyTicket(int id);
 
     private:
     std::string name, place, date, price, availableTicket;

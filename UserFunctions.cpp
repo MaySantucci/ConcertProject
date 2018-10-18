@@ -84,3 +84,7 @@ void UserFunctions::insertPreferredEvent(int id) {
 void UserFunctions::deletePreferredEvent(int id) {
     handler->removeFromPreferred(id);
 } 
+
+void UserFunctions::buyTicket(int id) {
+    handler->buyTicket(id);
+}

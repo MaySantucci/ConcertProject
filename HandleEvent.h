@@ -5,10 +5,13 @@
 #include "Concert.h"
 #include "Show.h"
 #include "Ballet.h"
+#include "Vendor.h"
 #include <vector>
 
+template <typename T>
 class HandleEvent {
     public:
+    HandleEvent();
     ~HandleEvent();
 
     //Functions to manage Events    
@@ -40,11 +43,17 @@ class HandleEvent {
 
     void formExtra(std::vector<std::string>& att, int position, std::string type);
 
+    //Function to Buy a ticket
+    void buyTicket(int id);
+
     //variables
     int code = 0;
 
     std::vector<Event*> events;
     std::vector<Event*> preferredEvents;
+
+    T* vendor;
+
 
 };
 
