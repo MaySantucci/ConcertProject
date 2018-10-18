@@ -1,75 +1,9 @@
 #include "HandleEvent.h"
 #include <iostream>
-template <typename T> HandleEvent<T>::HandleEvent() { vendor = new T; }
-// Destructor
-template <typename T> HandleEvent<T>::~HandleEvent<T>() {
-  for (int i = 0; i < events.size(); i++) {
-    delete events.at(i);
-  }
-}
+/*
 
-// Functions to manage Events
-template <typename T> void HandleEvent<T>::listEvents() {
-  if (events.empty()) {
-    std::cout << "No events stored. \n";
-  } else {
-    std::cout << "EVENTS: \n";
-    for (auto it = events.begin(); it != events.end(); it++) {
-
-      // std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()<<
-      // "\n";
-      if (dynamic_cast<Show *>(*it)) {
-        std::cout << "Id: " << (*it)->id() << " Show: " << (*it)->name()
-                  << "\n";
-      } else if (dynamic_cast<Ballet *>(*it)) {
-        std::cout << "Id: " << (*it)->id() << " Ballet: " << (*it)->name()
-                  << "\n";
-      } else if (dynamic_cast<Concert *>(*it)) {
-        std::cout << "Id: " << (*it)->id() << " Concert: " << (*it)->name()
-                  << "\n";
-      } else {
-        std::cout << "Id: " << (*it)->id() << " Event: " << (*it)->name()
-                  << "\n";
-      }
-    }
-  }
-}
-template <typename T>
-void HandleEvent<T>::addShowToEvents(std::string name, std::string place,
-                                     std::string date, std::string price,
-                                     std::string availableTicket) {
-  Show *showToAdd = new Show(code, name, place, date, price, availableTicket);
-  events.push_back(showToAdd);
-  code++;
-}
-
-template <typename T>
-void HandleEvent<T>::addBalletToEvents(std::string name, std::string place,
-                                       std::string date, std::string price,
-                                       std::string availableTicket) {
-  Ballet *balletToAdd =
-      new Ballet(code, name, place, date, price, availableTicket);
-  events.push_back(balletToAdd);
-  code++;
-}
-
-template <typename T>
-void HandleEvent<T>::addConcertToEvents(std::string groupName,
-                                        std::string place, std::string date,
-                                        std::string price,
-                                        std::string availableTicket) {
-  Concert *concertToAdd =
-      new Concert(code, groupName, place, date, price, availableTicket);
-  events.push_back(concertToAdd);
-  code++;
-}
-
-template <typename T> bool HandleEvent<T>::checkIfEventsEmpty() {
-  return events.empty();
-}
-
-template <typename T>
-Event *HandleEvent<T>::getEventById(int id, int &position) {
+template <typename T, typename E>
+Event *HandleEvent<T, E>::getEventById(int id, int &position) {
   int i = 0;
   for (auto it = events.begin(); it != events.end(); it++) {
     if ((*it)->id() == id) {
@@ -81,7 +15,8 @@ Event *HandleEvent<T>::getEventById(int id, int &position) {
   return nullptr;
 }
 
-template <typename T> void HandleEvent<T>::getEventDetails(int id) {
+template <typename T, typename E>
+void HandleEvent<T, E>::getEventDetails(int id) {
   int position = -1;
   Event *found = getEventById(id, position);
   if (found != nullptr) {
@@ -114,7 +49,7 @@ template <typename T> void HandleEvent<T>::getEventDetails(int id) {
   }
 }
 
-template <typename T> void HandleEvent<T>::updateEvent(int id) {
+template <typename T, typename E> void HandleEvent<T, E>::updateEvent(int id) {
   int position = -1;
 
   if (getEventById(id, position) != nullptr) {
@@ -162,7 +97,7 @@ template <typename T> void HandleEvent<T>::updateEvent(int id) {
   }
 }
 
-template <typename T> void HandleEvent<T>::removeEvent(int id) {
+template <typename T, typename E> void HandleEvent<T, E>::removeEvent(int id) {
   int position = -1;
   if (getEventById(id, position) != nullptr) {
     removeFromPreferred(id);
@@ -175,11 +110,13 @@ template <typename T> void HandleEvent<T>::removeEvent(int id) {
 
 // Functions to manage Preferred Events
 
-template <typename T> bool HandleEvent<T>::checkIfPreferredEventsEmpty() {
+template <typename T, typename E>
+bool HandleEvent<T, E>::checkIfPreferredEventsEmpty() {
   return preferredEvents.empty();
 }
 
-template <typename T> void HandleEvent<T>::addToPreferred(int id) {
+template <typename T, typename E>
+void HandleEvent<T, E>::addToPreferred(int id) {
   int position = -1;
   Event *found = getEventById(id, position);
 
@@ -191,7 +128,8 @@ template <typename T> void HandleEvent<T>::addToPreferred(int id) {
   }
 }
 
-template <typename T> void HandleEvent<T>::listPreferredEvents() {
+template <typename T, typename E>
+void HandleEvent<T, E>::listPreferredEvents() {
   if (checkIfPreferredEventsEmpty()) {
     std::cout << "No preferred events stored. \n";
   } else {
@@ -219,8 +157,8 @@ template <typename T> void HandleEvent<T>::listPreferredEvents() {
   }
 }
 
-template <typename T>
-Event *HandleEvent<T>::getPreferredById(int id, int &position) {
+template <typename T, typename E>
+Event *HandleEvent<T, E>::getPreferredById(int id, int &position) {
   int i = 0;
   for (auto it = preferredEvents.begin(); it != preferredEvents.end(); it++) {
     if ((*it)->id() == id) {
@@ -232,7 +170,8 @@ Event *HandleEvent<T>::getPreferredById(int id, int &position) {
   return nullptr;
 }
 
-template <typename T> void HandleEvent<T>::removeFromPreferred(int id) {
+template <typename T, typename E>
+void HandleEvent<T, E>::removeFromPreferred(int id) {
   int position = -1;
   if (getPreferredById(id, position) != nullptr) {
     preferredEvents.erase(preferredEvents.begin() + position);
@@ -243,7 +182,7 @@ template <typename T> void HandleEvent<T>::removeFromPreferred(int id) {
 
 // Function to manage extraInfo
 
-template <typename T> void HandleEvent<T>::addExtra(int id) {
+template <typename T, typename E> void HandleEvent<T, E>::addExtra(int id) {
   int position = -1;
   if (getEventById(id, position) != nullptr) {
     std::cout << "event found. \n";
@@ -265,9 +204,9 @@ template <typename T> void HandleEvent<T>::addExtra(int id) {
   }
 }
 
-template <typename T>
-void HandleEvent<T>::formExtra(std::vector<std::string> &att, int position,
-                               std::string type) {
+template <typename T, typename E>
+void HandleEvent<T, E>::formExtra(std::vector<std::string> &att, int position,
+                                  std::string type) {
   std::string results;
   for (auto it = att.begin(); it != att.end(); it++) {
     std::cout << *it << ": ";
@@ -281,7 +220,7 @@ void HandleEvent<T>::formExtra(std::vector<std::string> &att, int position,
   }
 }
 
-template <typename T> void HandleEvent<T>::printExtra(int id) {
+template <typename T, typename E> void HandleEvent<T, E>::printExtra(int id) {
   int position = -1;
   if (getEventById(id, position) != nullptr) {
     std::map<std::string, std::string>::iterator it;
@@ -294,7 +233,7 @@ template <typename T> void HandleEvent<T>::printExtra(int id) {
   }
 }
 
-template <typename T> void HandleEvent<T>::updateExtra(int id) {
+template <typename T, typename E> void HandleEvent<T, E>::updateExtra(int id) {
   int position = -1;
   if (getEventById(id, position) != nullptr) {
     std::vector<std::string> att = events[position]->allowedAttributes();
@@ -304,7 +243,7 @@ template <typename T> void HandleEvent<T>::updateExtra(int id) {
   }
 }
 
-template <typename T> void HandleEvent<T>::deleteExtra(int id) {
+template <typename T, typename E> void HandleEvent<T, E>::deleteExtra(int id) {
   int pos = -1;
   if (getEventById(id, pos) != nullptr) {
     events[pos]->removeAttributes();
@@ -315,8 +254,8 @@ template <typename T> void HandleEvent<T>::deleteExtra(int id) {
   }
 }
 
-template <typename T> void HandleEvent<T>::buyTicket(int id) {
-  
+template <typename T, typename E> void HandleEvent<T, E>::buyTicket(int id) {
+
   int pos = -1;
   Event *found = getEventById(id, pos);
 
@@ -325,5 +264,6 @@ template <typename T> void HandleEvent<T>::buyTicket(int id) {
   } else {
     std::cout << "No event found with this id. \n";
   }
-
 }
+
+*/

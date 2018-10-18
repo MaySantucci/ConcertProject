@@ -1,9 +1,11 @@
 #include "HandleEvent.h"
+#include "Event.h"
+#include "Show.h"
+#include "Ballet.h"
+#include "Concert.h"
 
 class UserFunctions {
     public: 
-    HandleEvent<Vendor>* handler = new HandleEvent();
-
     //Function to manage Events 
     void listEvents();
     void detailsEvent(int id);
@@ -28,6 +30,12 @@ class UserFunctions {
     void deleteExtraInfo(int id);
 
     void buyTicket(int id);
+
+
+    HandleEvent<Vendor,Event>* handler = new HandleEvent<Vendor,Event>();
+    HandleEvent<Vendor, Show>* handlerShow = new HandleEvent <Vendor, Show>();
+    HandleEvent<Vendor, Ballet>* handlerBallet = new HandleEvent <Vendor, Ballet>();
+    HandleEvent<Vendor, Concert>* handlerConcert = new HandleEvent <Vendor, Concert>();
 
     private:
     std::string name, place, date, price, availableTicket;
