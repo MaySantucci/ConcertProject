@@ -86,8 +86,14 @@ public:
        value ++;
      }
    };
-  // void printExtra(int id);
-  // void updateExtra(int id);
+
+  void updateExtraInfo(Event* e, std::vector<std::string> keys, std::vector<std::string> values) {
+    auto value = values.begin();
+    for (auto it = keys.begin(); it != keys.end(); it++) {
+      e->updateAttributes(*it, *value);
+      value++;
+    }
+  };
   // void deleteExtra(int id);
   //
   // void formExtra(std::vector<std::string> &att, int position, std::string

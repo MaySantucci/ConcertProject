@@ -253,7 +253,7 @@ int main(int argc, char const *argv[])
         {
           id = stoi(id_sting);
 
-          //user->updateExtraInfo(id);
+          user->updateExtraInfo(id);
         }
         catch (std::invalid_argument)
         {

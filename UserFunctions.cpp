@@ -83,7 +83,7 @@ void UserFunctions::detailsEvent(int id) {
     std::cout << "Event with this id not found. \n";
   } else {
     printDetails(event);
-    if(!event->attributes().empty()) {
+    if (!event->attributes().empty()) {
       printExtraInfo(event->attributes());
     }
   }
@@ -108,10 +108,10 @@ void UserFunctions::addExtraInfo(int id) {
   if (found != nullptr) {
     // show form for extra.
     std::vector<std::string> att = found->allowedAttributes();
-    if(!att.empty()) {
+    if (!att.empty()) {
       std::vector<std::string> valueExtra = formExtra(att);
       if (!valueExtra.empty()) {
-        //add extra info to event
+        // add extra info to event
         handler->addExtra(found, att, valueExtra);
         std::cout << "Extra informations added. \n";
       }
@@ -125,7 +125,8 @@ void UserFunctions::addExtraInfo(int id) {
   }
 }
 
-std::vector<std::string> UserFunctions::formExtra(std::vector<std::string> &att) {
+std::vector<std::string>
+UserFunctions::formExtra(std::vector<std::string> &att) {
   std::vector<std::string> results;
   std::string input;
   for (auto it = att.begin(); it != att.end(); it++) {
@@ -139,23 +140,37 @@ std::vector<std::string> UserFunctions::formExtra(std::vector<std::string> &att)
 
 void UserFunctions::listExtraInfo(int id) {
   int position = -1;
-  Event* found = handler->getEventById(id, position);
-  if(found != nullptr && !found->attributes().empty()) {
+  Event *found = handler->getEventById(id, position);
+  if (found != nullptr && !found->attributes().empty()) {
     printExtraInfo(found->attributes());
   } else {
     std::cout << "No extra information stored for this event.\n";
   }
 }
 
-
-void UserFunctions::printExtraInfo(std::map<std::string, std::string> attributes) {
+void UserFunctions::printExtraInfo(
+    std::map<std::string, std::string> attributes) {
   for (auto it = attributes.begin(); it != attributes.end(); it++) {
-    std::cout << it->first << ": " << it->second << "\n"; 
+    std::cout << it->first << ": " << it->second << "\n";
   }
 }
 
 void UserFunctions::updateExtraInfo(int id) {
-  // handler->updateExtra(id);
+  int position = -1;
+  Event *found = handler->getEventById(id, position);
+  if (found != nullptr) {
+    std::vector<std::string> att = found->allowedAttributes();
+    if (!found->attributes().empty()) {
+      std::vector<std::string> results = formExtra(att);
+      handler->updateExtraInfo(found, att, results);
+    } else {
+      std::cout
+          << "Impossible to edit extra informations for this event because "
+             "there is not extra informations stored for this event. \n";
+    }
+  } else {
+    std::cout << "No event found. \n";
+  }
 }
 
 void UserFunctions::deleteExtraInfo(int id) {
