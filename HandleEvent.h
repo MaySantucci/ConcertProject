@@ -1,53 +1,52 @@
 #ifndef __HANDLECONCERT_H__
 #define __HANDLECONCERT_H__
 
-#include "Ballet.h"
-#include "Concert.h"
-#include "Event.h"
-#include "Show.h"
-#include "Vendor.h"
+#include <iostream>
+#include <string>
 #include <vector>
 
-template <typename T, typename E> class HandleEvent {
+
+template <typename Vendor, typename Event> class HandleEvent {
 public:
-  T *vendor;
+  Vendor *vendor;
 
-  std::vector<E *> events;
-  std::vector<E *> preferredEvents;
+  std::vector<Event *> events;
+  std::vector<Event *> preferredEvents;
 
-  HandleEvent() { vendor = new T; };
+  HandleEvent() { vendor = new Vendor; };
   ~HandleEvent() {
+    delete vendor;
     for (int i = 0; i < events.size(); i++) {
       delete events.at(i);
     }
   };
 
   // Functions to manage Events
-  std::vector<E *> listEvents() { return events; };
+  std::vector<Event *> listEvents() { return events; };
 
-  void addEventToEvents(int code, std::string name, std::string place, std::string date,
-                        std::string price, std::string availableTicket) {
-    events.push_back(new E(code, name, place, date, price, availableTicket));
-
-    std::cout << "Size: " << events.size() << "\n";
-  };
+  void addEventToEvents(Event *event) { events.push_back(event); };
 
   bool checkIfEventsEmpty() { return events.empty(); };
 
-  E* getEventById(int id, int &position) {
-      int i = 0;
-      for(auto event : events) {
-          if(event->id() == id) {
-              position = i;
-              return event;
-          }
+  Event *getEventById(int id, int &position) {
+    int i = 0;
+    for (auto event : events) {
+      if (event->id() == id) {
+        position = i;
+        return event;
       }
-      return nullptr;
+      i++;
+    }
+    return nullptr;
   };
 
-
-  //
-  // void updateEvent(int id);
+  void updateEvent(int position, std::string name, std::string place, std::string date , std::string price, std::string availableTicket) {
+    events[position]->setName(name);
+    events[position]->setPlace(place);
+    events[position]->setDate(date);
+    events[position]->setPrice(price);
+    events[position]->setAvailableTicket(availableTicket);
+  };
   // void removeEvent(int id);
   //
   // // Functions to manage Preferred Events

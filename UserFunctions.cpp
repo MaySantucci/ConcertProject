@@ -1,33 +1,30 @@
 #include "UserFunctions.h"
+#include "Ballet.h"
+#include "Concert.h"
+#include "Show.h"
 #include <iostream>
+#include <string>
+
 
 // Functions to manage Events
 
 void UserFunctions::listEvents() {
-  std::vector<Show *> shows = handlerShow->listEvents();
-  std::vector<Ballet *> ballets = handlerBallet->listEvents();
-  std::vector<Concert *> concerts = handlerConcert->listEvents();
-  if (!shows.empty()) {
-    for (auto show : shows) {
-      std::cout << "Id: " << show->id() << " Show: " << show->name() << "\n";
-    }
-  }
-  if (!ballets.empty()) {
-    for (auto ballet : ballets) {
-      std::cout << "Id: " << ballet->id() << " Ballet: " << ballet->name()
-                << "\n";
-    }
-  }
-  if (!concerts.empty()) {
-    for (auto concert : concerts) {
-      std::cout << "Id: " << concert->id() << " Concert: " << concert->name()
-                << "\n";
-    }
-  }
 
-  if (shows.empty() && ballets.empty() && concerts.empty()) {
+  std::vector<Event *> events = handler->listEvents();
+  if (!events.empty()) {
+    for (auto event : events) {
+      printDetails(event);
+    }
+  } else {
     std::cout << "No events stored. \n";
   }
+}
+
+void UserFunctions::printDetails(Event *e) {
+  std::cout << "Id: " << e->id() << " Name: " << e->name() << "\n";
+  std::cout << "Place: " << e->place() << " Date: " << e->date() << "\n";
+  std::cout << "Price: " << e->price()
+            << " Available Ticket: " << e->availableTicket() << "\n";
 }
 
 void UserFunctions::showForm(std::string &n, std::string &pl, std::string &d,
@@ -50,30 +47,30 @@ void UserFunctions::showForm(std::string &n, std::string &pl, std::string &d,
 }
 
 void UserFunctions::insertEvent(std::string type_event) {
+
   showForm(name, place, date, price, availableTicket);
+  Event *event = nullptr;
 
   if (type_event == "a") {
     // add Show to Events
-    std::cout << "Show. \n";
-    handlerShow->addEventToEvents(codeEvent, name, place, date, price, availableTicket);
-    codeEvent++;
+    event = new Show(idEvent, name, place, date, price, availableTicket);
+    handler->addEventToEvents(event);
+    idEvent++;
   } else if (type_event == "b") {
     // add Ballet to Events
-    std::cout << "Ballet. \n";
-    handlerBallet->addEventToEvents(codeEvent, name, place, date, price, availableTicket);
-    codeEvent++;
+    event = new Ballet(idEvent, name, place, date, price, availableTicket);
+    handler->addEventToEvents(event);
+    idEvent++;
   } else if (type_event == "c") {
     // add Concert to Events
-    std::cout << "Concert. \n";
-    handlerConcert->addEventToEvents(codeEvent, name, place, date, price, availableTicket);
-    codeEvent++;
+    event = new Concert(idEvent, name, place, date, price, availableTicket);
+    handler->addEventToEvents(event);
+    idEvent++;
   }
 }
 
 bool UserFunctions::checkEventsInit() {
-  if (handlerShow->checkIfEventsEmpty() &&
-      handlerBallet->checkIfEventsEmpty() &&
-      handlerConcert->checkIfEventsEmpty()) {
+  if (handler->checkIfEventsEmpty()) {
     return true;
   }
   return false;
@@ -81,27 +78,26 @@ bool UserFunctions::checkEventsInit() {
 
 void UserFunctions::detailsEvent(int id) {
   int position = -1;
-  Show *show = handlerShow->getEventById(id, position);
-  Ballet *ballet = handlerBallet->getEventById(id, position);
-  Concert *concert = handlerConcert->getEventById(id, position);
+  Event *event = handler->getEventById(id, position);
 
-  if (show == nullptr && ballet == nullptr && concert == nullptr) {
+  if (event == nullptr) {
     std::cout << "Event with this id not found. \n";
-  } else if (show != nullptr) {
-      printDetails(show);
-  } else if (ballet != nullptr) {
-      printDetails(ballet);
-  } else if (concert != nullptr) {
-      printDetails(concert);
+  } else {
+    printDetails(event);
   }
 }
 
-void UserFunctions::printDetails(Event *e) {
-  std::cout << "Id: " << e->id() << " Name: " << e->name() << "\n";
-  std::cout << "Place: " << e->place() << " Date: " << e->date() << "\n";
-  std::cout << "Price: " << e->price()
-            << " Available Ticket: " << e->availableTicket() << "\n";
-}
+void UserFunctions::updateEvent(int id) {
+    int position = -1;
+    Event* found = handler->getEventById(id, position);
+    if(found != nullptr) {
+      showForm(name, place, date, price, availableTicket);
+      handler->updateEvent(position, name, place, date, price, availableTicket);      
+      std::cout << "Event updated. \n";
+    } else {
+      std::cout << "Event not found. \n";
+    }
+  }
 
 void UserFunctions::addExtraInfo(int id) {
   // handler->addExtra(id);
@@ -119,9 +115,6 @@ void UserFunctions::deleteExtraInfo(int id) {
   // handler->deleteExtra(id);
 }
 
-void UserFunctions::updateEvent(int id) {
-  // handler->updateEvent(id);
-}
 void UserFunctions::deleteEvent(int id) {
   // handler->removeEvent(id);
 }

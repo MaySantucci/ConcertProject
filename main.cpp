@@ -1,6 +1,7 @@
 #include "HandleEvent.h"
 #include "UserFunctions.h"
 #include <iostream>
+#include <string>
 #include <map>
 
 int main(int argc, char const *argv[])
@@ -101,7 +102,7 @@ int main(int argc, char const *argv[])
         try
         {
           id = stoi(id_sting);
-          //user->updateEvent(id);
+          user->updateEvent(id);
         }
         catch (std::invalid_argument)
         {
