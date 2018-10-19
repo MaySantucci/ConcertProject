@@ -26,7 +26,11 @@ class UserFunctions {
 
     //Function to add MetaData
     void addExtraInfo(int id);
+    std::vector<std::string> formExtra(std::vector<std::string> &att);
     void listExtraInfo(int id);
+    
+    void printExtraInfo(std::map<std::string, std::string> attributes);
+
     void updateExtraInfo(int id);
     void deleteExtraInfo(int id);
 
