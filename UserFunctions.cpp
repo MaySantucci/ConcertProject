@@ -116,21 +116,54 @@ void UserFunctions::deleteExtraInfo(int id) {
 }
 
 void UserFunctions::deleteEvent(int id) {
-  // handler->removeEvent(id);
+  int eventPosition = -1;
+  int preferredPosition = -1;
+  if(handler->getEventById(id, eventPosition) != nullptr) {
+    //check if the event is present in favourite's event.
+    if(handler->getPreferredById(id, preferredPosition) != nullptr) {
+      handler->removeFromPreferred(preferredPosition);
+    }
+    
+    handler->removeEvent(eventPosition);
+    std::cout << "Event removed. \n";
+  } else {
+    std::cout << "Event not found. \n";
+  }
+
+}
+
+void UserFunctions::insertPreferredEvent(int id) {
+  int position = -1;
+  Event* found = handler->getEventById(id, position);
+  if(found != nullptr) {
+    handler->addToPreferred(found);
+  } else {
+    std::cout << "Event with this id not found. Impossible to add in Favourite. \n";
+  }
 }
 
 // Functions to manage Preferred Events
 void UserFunctions::listPreferredEvents() {
-  // handler->listPreferredEvents();
+  std::vector<Event*> favourites = handler->listPreferredEvents();
+  if(!favourites.empty()){
+    for (auto favourite : favourites) {
+      printDetails(favourite);
+    }
+  } else {
+    std::cout << "No events stored in favourites. \n";
+  }
 }
 bool UserFunctions::checkPreferredEventsInit() {
-  // return handler->checkIfPreferredEventsEmpty();
-}
-void UserFunctions::insertPreferredEvent(int id) {
-  // handler->addToPreferred(id);
+  return handler->checkIfPreferredEventsEmpty();
 }
 void UserFunctions::deletePreferredEvent(int id) {
-  // handler->removeFromPreferred(id);
+  int position = -1;
+  Event* found = handler->getPreferredById(id, position);
+  if(found != nullptr) {
+    handler->removeFromPreferred(position);
+  } else {
+    std::cout << "Event not stored in favourites. \n";
+  }
 }
 
 void UserFunctions::buyTicket(int id) {

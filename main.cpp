@@ -123,7 +123,7 @@ int main(int argc, char const *argv[])
         {
           id = stoi(id_sting);
 
-          // user->deleteEvent(id);
+          user->deleteEvent(id);
         }
         catch (std::invalid_argument)
         {
@@ -148,7 +148,7 @@ int main(int argc, char const *argv[])
         {
           id = stoi(id_sting);
 
-          //user->insertPreferredEvent(id);
+          user->insertPreferredEvent(id);
         }
         catch (std::invalid_argument)
         {
@@ -173,7 +173,7 @@ int main(int argc, char const *argv[])
         {
           id = stoi(id_sting);
 
-          //user->deletePreferredEvent(id);
+          user->deletePreferredEvent(id);
         }
         catch (std::invalid_argument)
         {
@@ -188,7 +188,7 @@ int main(int argc, char const *argv[])
     else if (in == "listar" || in == "8")
     {
       std::cout << "\t (8) - List all preferred event. \n";
-      //user->listPreferredEvents();
+      user->listPreferredEvents();
     }
     else if (in == "extrainfo" || in == "9")
     {

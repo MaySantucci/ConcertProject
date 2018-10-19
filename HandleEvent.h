@@ -22,7 +22,7 @@ public:
   };
 
   // Functions to manage Events
-  std::vector<Event *> listEvents() { return events; };
+  std::vector<Event*> listEvents() { return events; };
 
   void addEventToEvents(Event *event) { events.push_back(event); };
 
@@ -47,14 +47,40 @@ public:
     events[position]->setPrice(price);
     events[position]->setAvailableTicket(availableTicket);
   };
-  // void removeEvent(int id);
-  //
-  // // Functions to manage Preferred Events
-  // void listPreferredEvents();
-  // bool checkIfPreferredEventsEmpty();
-  // void addToPreferred(int id);
-  // Event *getPreferredById(int id, int &position);
-  // void removeFromPreferred(int id);
+
+  void removeEvent(int position) {
+    delete events[position];
+    events.erase(events.begin() + position);
+  };
+
+  
+  std::vector<Event*> listPreferredEvents() {
+    return preferredEvents;
+  };
+  
+  void addToPreferred(Event* e) {
+    preferredEvents.push_back(e);
+  };
+
+  bool checkIfPreferredEventsEmpty() {
+    return preferredEvents.empty();
+  };
+
+  Event* getPreferredById(int id, int &position) {
+    int i = 0;
+    for (auto favourite : preferredEvents) {
+      if(favourite->id() == id) {
+        position = i;
+        return favourite;
+      }
+      i++;
+    }
+    return nullptr;
+  };
+  
+  void removeFromPreferred(int position) {
+    preferredEvents.erase(preferredEvents.begin() + position);
+  };
   //
   // // Function to manage ExtraInfo
   // void addExtra(int id);
