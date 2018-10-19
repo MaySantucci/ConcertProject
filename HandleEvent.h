@@ -94,13 +94,16 @@ public:
       value++;
     }
   };
-  // void deleteExtra(int id);
-  //
-  // void formExtra(std::vector<std::string> &att, int position, std::string
-  // type);
-  //
-  // // Function to Buy a ticket
-  // void buyTicket(int id);
+
+  void removeExtra(Event* e) {
+    e->removeAttributes();
+  };
+
+  // Function to Buy a ticket
+  void buyTicket(Event* e) {
+    vendor->buyTicket(e);
+  };
+
 };
 
 #endif

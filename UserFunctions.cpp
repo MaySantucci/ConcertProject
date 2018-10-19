@@ -174,7 +174,18 @@ void UserFunctions::updateExtraInfo(int id) {
 }
 
 void UserFunctions::deleteExtraInfo(int id) {
-  // handler->deleteExtra(id);
+  int position = -1;
+  Event* found = handler->getEventById(id, position);
+
+  if(found != nullptr) {
+    if (!found->attributes().empty()) {
+      handler->removeExtra(found);
+    } else {
+      std::cout
+          << "Impossible to edit extra informations for this event because "
+             "there is not extra informations stored for this event. \n";
+    }
+  }
 }
 
 void UserFunctions::deleteEvent(int id) {
@@ -229,5 +240,9 @@ void UserFunctions::deletePreferredEvent(int id) {
 }
 
 void UserFunctions::buyTicket(int id) {
-  // handler->buyTicket(id);
+  int position = -1;
+  Event* found = handler->getEventById(id, position);
+  if(found != nullptr) {
+    handler->buyTicket(found);
+  }
 }

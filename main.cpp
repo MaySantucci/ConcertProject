@@ -278,7 +278,7 @@ int main(int argc, char const *argv[])
         {
           id = stoi(id_sting);
 
-          //user->deleteExtraInfo(id);
+          user->deleteExtraInfo(id);
         }
         catch (std::invalid_argument)
         {
@@ -301,7 +301,7 @@ int main(int argc, char const *argv[])
         try
         {
           id = stoi(id_sting);
-          //user->buyTicket(id);
+          user->buyTicket(id);
         }
         catch (std::invalid_argument)
         {
