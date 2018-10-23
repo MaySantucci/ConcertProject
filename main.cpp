@@ -3,13 +3,15 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <memory>
 
 int main(int argc, char const *argv[])
 {
 
   char input[100];
   std::string in;
-  UserFunctions *user = new UserFunctions();
+  //UserFunctions *user = new UserFunctions();
+  std::unique_ptr<UserFunctions> user = std::make_unique<UserFunctions>();
 
   while (true)
   {

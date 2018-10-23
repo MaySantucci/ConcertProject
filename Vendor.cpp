@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-void Vendor::buyTicket(Event *e) {
+void Vendor::buyTicket(Event* e) {
   try {
     int ticket = stoi(e->availableTicket());
     std::cout << "available ticket: " << ticket << "\n";

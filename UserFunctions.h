@@ -1,6 +1,7 @@
 #include "HandleEvent.h"
 #include "Event.h"
 #include "Vendor.h"
+#include <memory>
 
 class UserFunctions {
     public: 
@@ -36,7 +37,8 @@ class UserFunctions {
 
     void buyTicket(int id);
 
-    HandleEvent<Vendor,Event>* handler = new HandleEvent<Vendor,Event>();
+    //HandleEvent<Vendor,Event>* handler = new HandleEvent<Vendor,Event>();
+    std::unique_ptr<HandleEvent<Vendor,Event>> handler = std::make_unique<HandleEvent<Vendor, Event>>(); 
 
     private:
     std::string name, place, date, price, availableTicket;

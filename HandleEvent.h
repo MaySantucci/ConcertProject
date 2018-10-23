@@ -4,35 +4,42 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
-template <typename Vendor, typename Event> class HandleEvent {
+template <typename Vendor, typename Event>
+class HandleEvent
+{
+
 public:
-  Vendor *vendor;
-
-  std::vector<Event *> events;
+  std::vector<std::unique_ptr<Event>> events;
   std::vector<Event *> preferredEvents;
 
-  HandleEvent() { vendor = new Vendor; };
-  ~HandleEvent() {
-    delete vendor;
-    for (int i = 0; i < events.size(); i++) {
-      delete events.at(i);
-    }
-  };
+  std::unique_ptr<Vendor> vendor;
+
+  HandleEvent() { vendor = std::make_unique<Vendor>(); };
 
   // Functions to manage Events
-  std::vector<Event *> listEvents() { return events; };
+  const std::vector<std::unique_ptr<Event>> &listEvents()
+  {
+    return events;
+  };
 
-  void addEventToEvents(Event *event) { events.push_back(event); };
+  void addEventToEvents(std::unique_ptr<Event> event)
+  {
+    events.push_back(std::move(event));
+  };
 
   bool checkIfEventsEmpty() { return events.empty(); };
 
-  Event *getEventById(int id, int &position) {
+  Event *getEventById(int id, int &position)
+  {
     int i = 0;
-    for (auto event : events) {
-      if (event->id() == id) {
+    for (auto &event : events)
+    {
+      if (event->id() == id)
+      {
         position = i;
-        return event;
+        return event.get();
       }
       i++;
     }
@@ -41,7 +48,8 @@ public:
 
   void updateEvent(int position, std::string name, std::string place,
                    std::string date, std::string price,
-                   std::string availableTicket) {
+                   std::string availableTicket)
+  {
     events[position]->setName(name);
     events[position]->setPlace(place);
     events[position]->setDate(date);
@@ -49,8 +57,8 @@ public:
     events[position]->setAvailableTicket(availableTicket);
   };
 
-  void removeEvent(int position) {
-    delete events[position];
+  void removeEvent(int position)
+  {
     events.erase(events.begin() + position);
   };
 
@@ -61,10 +69,13 @@ public:
 
   bool checkIfPreferredEventsEmpty() { return preferredEvents.empty(); };
 
-  Event *getPreferredById(int id, int &position) {
+  Event *getPreferredById(int id, int &position)
+  {
     int i = 0;
-    for (auto favourite : preferredEvents) {
-      if (favourite->id() == id) {
+    for (auto &favourite : preferredEvents)
+    {
+      if (favourite->id() == id)
+      {
         position = i;
         return favourite;
       }
@@ -73,37 +84,43 @@ public:
     return nullptr;
   };
 
-  void removeFromPreferred(int position) {
+  void removeFromPreferred(int position)
+  {
     preferredEvents.erase(preferredEvents.begin() + position);
   };
 
   // Function to manage ExtraInfo
 
-   void addExtra(Event* event, std::vector<std::string> att, std::vector<std::string> values) {
-     auto value = values.begin();
-     for (auto it = att.begin(); it != att.end(); it++) {
-       event->setAttributes(*it, *value);
-       value ++;
-     }
-   };
-
-  void updateExtraInfo(Event* e, std::vector<std::string> keys, std::vector<std::string> values) {
+  void addExtra(Event *event, std::vector<std::string> att, std::vector<std::string> values)
+  {
     auto value = values.begin();
-    for (auto it = keys.begin(); it != keys.end(); it++) {
+    for (auto it = att.begin(); it != att.end(); it++)
+    {
+      event->setAttributes(*it, *value);
+      value++;
+    }
+  };
+
+  void updateExtraInfo(Event *e, std::vector<std::string> keys, std::vector<std::string> values)
+  {
+    auto value = values.begin();
+    for (auto it = keys.begin(); it != keys.end(); it++)
+    {
       e->updateAttributes(*it, *value);
       value++;
     }
   };
 
-  void removeExtra(Event* e) {
+  void removeExtra(Event *e)
+  {
     e->removeAttributes();
   };
 
   // Function to Buy a ticket
-  void buyTicket(Event* e) {
+  void buyTicket(Event *e)
+  {
     vendor->buyTicket(e);
   };
-
 };
 
 #endif

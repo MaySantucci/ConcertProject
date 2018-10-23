@@ -37,6 +37,18 @@
         "xmemory": "cpp",
         "map": "cpp",
         "tuple": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cwctype": "cpp",
+        "unordered_map": "cpp",
+        "fstream": "cpp",
+        "memory": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp",
+        "string_view": "cpp",
+        "functional": "cpp"
     }
 }
